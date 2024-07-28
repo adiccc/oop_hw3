@@ -20,4 +20,37 @@ public class Position {
     public int getY() {
         return y;
     }
+
+    // update the moves, this will not work well
+//    public void moveUp(){
+//        this.y--;
+//    }
+//    public void moveDown(){
+//        this.y++;
+//    }
+//    public void moveLeft(){
+//        this.x--;
+//    }
+//    public void moveRight(){
+//        this.x++;
+//    }
+//    public void moveRandom(){
+//        int rndMove = (int)(Math.random()*5);
+//        switch(rndMove){
+//            case 0 :
+//                break;
+//            case 1:
+//                moveDown();
+//                break;
+//            case 2:
+//                moveUp();
+//                break;
+//            case 3:
+//                moveLeft();
+//                break;
+//            case 4:
+//                moveRight();
+//                break;
+//        }
+//    }
 }
