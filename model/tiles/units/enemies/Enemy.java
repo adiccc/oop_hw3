@@ -2,9 +2,8 @@ package model.tiles.units.enemies;
 
 import model.tiles.units.Unit;
 import model.tiles.units.players.Player;
-import utils.Position;
 
-public abstract class Enemy extends Unit {
+public class Enemy extends Unit {
     protected int experienceValue;
 
     public Enemy(char tile, String name, int hitPoints, int attack, int defense, int experienceValue) {
@@ -32,7 +31,4 @@ public abstract class Enemy extends Unit {
         }
     }
 
-    public void turn(){}
-
-    public abstract void turn(Position playerPosition);
 }

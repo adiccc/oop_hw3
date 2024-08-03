@@ -3,7 +3,7 @@ package model.tiles.units.players;
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 
-public class Player extends Unit {
+public abstract class  Player extends Unit {
     public static final char PLAYER_TILE = '@';
     protected static final int LEVEL_REQUIREMENT = 50;
     protected static final int HEALTH_GAIN = 10;
@@ -75,4 +75,7 @@ public class Player extends Unit {
     public void onDeath() {
         //TODO: Implement onDeath
     }
+
+    public void newTick(){}
+    public void specialAbility(){}
 }
