@@ -34,14 +34,14 @@ public class Program
         instruction();
         int playerId=choosePlayer();
         LevelInitializer initializer=new LevelInitializer(playerId);
-        Game game=new Game(initializer);
+        Game game=new Game(initializer,messageCallback);
     }
 
 
     private int choosePlayer() {
         try{
             ArrayList<Player> pl=new ArrayList<>();
-            for(int i=0;i<tileFactory.getNumPlayer();i++)
+            for(int i=1;i<=tileFactory.getNumPlayer();i++)
                 pl.add(tileFactory.producePlayer(i));
             viewPlayersOption(pl);
             char charPlayerChoise=inputReader.readPlayerChoise(pl.size());

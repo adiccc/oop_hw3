@@ -33,23 +33,22 @@ public class TileFactory {
             () -> new Rogue("Bronn", 250,35,3,50)
     );
 
-    private static final Map<Character, Supplier<Enemy>> enemyTypes = Map.of(
-            's', () -> new Monster('s', "Lannister Solider", 80,8,3, 3, 25),
-            'k', () -> new Monster('k', "Lannister Knight", 200,14,8,4,50),
-            'q', () -> new Monster('q', "Queen’s Guard", 400,20,15,5,100),
-            'z', () -> new Monster('z', "Wright", 600,30,15,3,100),
-            'b', () -> new Monster('b', "Bear-Wright", 1000,75,30,4,250),
-            'g', () -> new Monster('g', "Giant-Wright", 1500,100,40,5,500),
-            'w', () -> new Monster('w', "White Walker ", 2000,150,50,6,1000),
-            'M', () -> new Monster('M', "The Mountain", 1000,60,25,6,500),
-            'C', () -> new Monster('C', "Queen Cersei", 100,10,10,1,1000),
-            'K', () -> new Monster('K', "Night’s King", 5000,300,150,8,500)
-//            'B', () -> new Trap('B', "Bonus Trap", 1,1,1,250,1,5),
-//            'Q', () -> new Trap('Q', "Queen’s Trap",250,50,10,100,3,7),
-//            'D', () -> new Trap('D', "Death Trap", 500,100,20,250,1,10)
-            );
+    private Map<Character, Supplier<Enemy>> enemyTypes;
     public TileFactory(){
-
+        enemyTypes = new HashMap<>();
+        enemyTypes.put('s', () -> new Monster('s', "Lannister Soldier", 80, 8, 3, 3, 25));
+        enemyTypes.put('k', () -> new Monster('k', "Lannister Knight", 200, 14, 8, 4, 50));
+        enemyTypes.put('q', () -> new Monster('q', "Queen’s Guard", 400, 20, 15, 5, 100));
+        enemyTypes.put('z', () -> new Monster('z', "Wright", 600, 30, 15, 3, 100));
+        enemyTypes.put('b', () -> new Monster('b', "Bear-Wright", 1000, 75, 30, 4, 250));
+        enemyTypes.put('g', () -> new Monster('g', "Giant-Wright", 1500, 100, 40, 5, 500));
+        enemyTypes.put('w', () -> new Monster('w', "White Walker", 2000, 150, 50, 6, 1000));
+        enemyTypes.put('M', () -> new Monster('M', "The Mountain", 1000, 60, 25, 6, 500));
+        enemyTypes.put('C', () -> new Monster('C', "Queen Cersei", 100, 10, 10, 1, 1000));
+        enemyTypes.put('K', () -> new Monster('K', "Night’s King", 5000, 300, 150, 8, 500));
+        enemyTypes.put('B', () -> new Trap('B', "Bonus Trap", 1,1,1,250,1,5));
+        enemyTypes.put('Q', () -> new Trap('Q', "Queen’s Trap",250,50,10,100,3,7));
+        enemyTypes.put('D', () -> new Trap('D', "Death Trap", 500,100,20,250,1,10));
     }
 
     public int getNumPlayer(){return playerTypes.size();}

@@ -54,7 +54,6 @@ public class LevelInitializer {
                         player.setPosition(position);
                         break;
                     default:
-                        System.out.println(c);
                         Enemy e=this.tileFactory.produceEnemy(c,position,null,null,null);
                         this.tiles.add(e);
                         this.enemies.add(e);

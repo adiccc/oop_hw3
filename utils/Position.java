@@ -1,6 +1,6 @@
 package utils;
 
-public class Position {
+public class Position implements Comparable<Position> {
     private int x;
     private int y;
 
@@ -20,6 +20,7 @@ public class Position {
     public int getY() {
         return y;
     }
+
 
     public int compareTo(Position position) {
         if (getX() > position.getX())
