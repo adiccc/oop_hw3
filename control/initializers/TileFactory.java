@@ -3,8 +3,14 @@ package control.initializers;
 import model.tiles.Empty;
 import model.tiles.Tile;
 import model.tiles.Wall;
+import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
+import model.tiles.units.enemies.Monster;
+import model.tiles.units.enemies.Trap;
+import model.tiles.units.players.Mage;
 import model.tiles.units.players.Player;
+import model.tiles.units.players.Rogue;
+import model.tiles.units.players.Warrior;
 import utils.Position;
 import utils.callbacks.DeathCallback;
 import utils.callbacks.MessageCallback;
@@ -19,18 +25,34 @@ import java.util.function.Supplier;
 public class TileFactory {
     private Player p;
     private static final List<Supplier<Player>> playerTypes = Arrays.asList(
-            () -> new Player("Player1", 10, 5, 2),
-            () -> new Player("Player2", 15, 3, 3),
-            () -> new Player("Player3", 20, 2, 4)
+            () -> new Warrior("Jon Snow", 300,30,4,3),
+            () -> new Warrior("The Hound", 400,20,6,5),
+            () -> new Mage("Melisandre", 100,5,1,300,30,15,5,6),
+            () -> new Mage("Thoros of Myr",250,25,4,150,20,20,3,4),
+            () -> new Rogue("Arya Stark",150,40,2,20),
+            () -> new Rogue("Bronn", 250,35,3,50)
     );
 
     private static final Map<Character, Supplier<Enemy>> enemyTypes = Map.of(
-            's', () -> new Enemy('s', "Enemy1", 10, 5, 2, 0),
-            'q', () -> new Enemy('q', "Enemy2", 15, 3, 3, 1),
-            'T', () -> new Enemy('T', "Enemy3", 20, 2, 4, 2)
-    );
+            's', () -> new Monster('s', "Lannister Solider", 80,8,3, 3, 25),
+            'k', () -> new Monster('k', "Lannister Knight", 200,14,8,4,50),
+            'q', () -> new Monster('q', "Queen’s Guard", 400,20,15,5,100),
+            'z', () -> new Monster('z', "Wright", 600,30,15,3,100),
+            'b', () -> new Monster('b', "Bear-Wright", 1000,75,30,4,250),
+            'g', () -> new Monster('g', "Giant-Wright", 1500,100,40,5,500),
+            'w', () -> new Monster('w', "White Walker ", 2000,150,50,6,1000),
+            'M', () -> new Monster('M', "The Mountain", 1000,60,25,6,500),
+            'C', () -> new Monster('C', "Queen Cersei", 100,10,10,1,1000),
+            'K', () -> new Monster('K', "Night’s King", 5000,300,150,8,500)
+//            'B', () -> new Trap('B', "Bonus Trap", 1,1,1,250,1,5),
+//            'Q', () -> new Trap('Q', "Queen’s Trap",250,50,10,100,3,7),
+//            'D', () -> new Trap('D', "Death Trap", 500,100,20,250,1,10)
+            );
     public TileFactory(){
+
     }
+
+    public int getNumPlayer(){return playerTypes.size();}
 
     public Player producePlayer(int playerID){
         Supplier<Player> supp = playerTypes.get(playerID-1);

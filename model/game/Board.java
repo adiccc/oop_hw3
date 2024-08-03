@@ -36,4 +36,8 @@ public class Board {
         }
         return sb.toString();
     }
+
+    public Map<Position, Tile> getBoard(){
+        return board;
+    }
 }

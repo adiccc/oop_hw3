@@ -11,15 +11,16 @@ public class Mage extends Player   {
     private int abilityRange;
 
 
-    public Mage(String name, int hitPoints, int attack, int defense , int manaPool, int spellPower) {
+    public Mage(String name, int hitPoints, int attack, int defense , int manaPool,int manaCost ,int spellPower, int hitsCount,int abilityRange) {
         super(name, hitPoints, attack, defense);
         this.manaPool = manaPool;
-        currentMana = manaPool/4;
+        this.currentMana = manaPool/4;
         this.spellPower = spellPower;
-        abilityRange = spellPower;
-        // finish define the hitCount and manaCost.
+        this.hitsCount = hitsCount;
+        this.abilityRange = abilityRange;
 
     }
+
     @Override
     public void levelUp(){
         super.levelUp();

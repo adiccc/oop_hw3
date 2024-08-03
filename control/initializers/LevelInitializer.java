@@ -1,16 +1,35 @@
 package control.initializers;
 
+import model.game.Board;
+import model.tiles.Tile;
+import model.tiles.units.enemies.Enemy;
+import model.tiles.units.players.Player;
+import utils.Position;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LevelInitializer {
-    private int playerID;
+    private Player player;
+    private TileFactory tileFactory;
+    private List<Enemy> enemies;
+    private List<Tile> tiles;
+    private int width;
 
     public LevelInitializer(int playerID){
-        this.playerID = playerID;
+        this.tileFactory = new TileFactory();
+        this.enemies = new ArrayList<>();
+        this.tiles = new ArrayList<>();
+        this.player=tileFactory.producePlayer(playerID);
+        this.width=-1;
+    }
+
+    public Board buildBord(){
+        return new Board(tiles,player,enemies,width);
     }
     public void initLevel(String levelPath){
         List<String> lines;
@@ -19,24 +38,32 @@ public class LevelInitializer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        int y = 0, x=0;
         for(String line : lines){
             for(char c : line.toCharArray()){
+                Position position = new Position(x, y);
                 switch(c) {
                     case '.':
-                        // create empty tile
+                        this.tiles.add(this.tileFactory.produceEmpty(position));
                         break;
                     case '#':
-                        // create wall tile
+                        this.tiles.add(this.tileFactory.produceWall(position));
                         break;
                     case '@':
-                        // create player tile
+                        this.tiles.add(this.tileFactory.producePlayer());
+                        player.setPosition(position);
                         break;
                     default:
-                        // create enemy tile
+                        System.out.println(c);
+                        Enemy e=this.tileFactory.produceEnemy(c,position,null,null,null);
+                        this.tiles.add(e);
+                        this.enemies.add(e);
                         break;
                 }
+                x++;
             }
+            y++;
         }
+        this.width=x;
     }
 }

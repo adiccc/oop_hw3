@@ -74,5 +74,22 @@ public abstract class Unit extends Tile {
         deathCallback.onDeath();
     }
 
+    // return a string that describe the unit
+    public String description() {
+        return String.format("%s\t\tHeath: %s\t\tAttack: %s\t\tDefense: %s", getName(), getHealth().toString(), getAttack(), getDefence());
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getHealth() {
+        return health.toString();
+    }
+    public String getAttack(){
+        return attack+"";
+    }
+    public String getDefence(){
+        return defense+"";
+    }
 
 }

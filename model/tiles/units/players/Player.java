@@ -2,6 +2,7 @@ package model.tiles.units.players;
 
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
+import utils.Position;
 
 public abstract class  Player extends Unit {
     public static final char PLAYER_TILE = '@';
@@ -78,4 +79,8 @@ public abstract class  Player extends Unit {
 
     public void newTick(){}
     public void specialAbility(){}
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 }

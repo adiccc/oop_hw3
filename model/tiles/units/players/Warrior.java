@@ -9,6 +9,9 @@ public class Warrior extends Player{
         this.abilityCoolDown = abilityCoolDown;
         this.remainingCoolDown = 0;
     }
+    public Warrior(String name, int attack, int defense, int abilityCoolDown ) {
+        this(name,0,attack,defense,abilityCoolDown);
+    }
     @Override
     public void levelUp(){
         super.levelUp();
@@ -17,15 +20,20 @@ public class Warrior extends Player{
         attack = attack+(2*level);
         defense = defense+level;
     }
+    // the Warrior describe
+    @Override
+    public String description() {
+        return super.description() + "\t\tCooldown: " + remainingCoolDown + "/" + abilityCoolDown;
+    }
+
 
     @Override
     public void newTick(){
         remainingCoolDown--;
     }
-    @Override
-    public void specialAbility(){
-        remainingCoolDown = abilityCoolDown;
-        health.setCurrent(Math.min(health.getCurrent()+(10*level), health.getCapacity()));
-    }
-
+//    @Override
+//    public void specialAbility(){
+//        remainingCoolDown = abilityCoolDown;
+//        health.setCurrent(Math.min(health.getCurrent()+(10*level), health.getCapacity()));
+//    }
 }

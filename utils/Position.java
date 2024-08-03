@@ -21,36 +21,20 @@ public class Position {
         return y;
     }
 
-    // update the moves, this will not work well
-//    public void moveUp(){
-//        this.y--;
-//    }
-//    public void moveDown(){
-//        this.y++;
-//    }
-//    public void moveLeft(){
-//        this.x--;
-//    }
-//    public void moveRight(){
-//        this.x++;
-//    }
-//    public void moveRandom(){
-//        int rndMove = (int)(Math.random()*5);
-//        switch(rndMove){
-//            case 0 :
-//                break;
-//            case 1:
-//                moveDown();
-//                break;
-//            case 2:
-//                moveUp();
-//                break;
-//            case 3:
-//                moveLeft();
-//                break;
-//            case 4:
-//                moveRight();
-//                break;
-//        }
-//    }
+    public int compareTo(Position position) {
+        if (getX() > position.getX())
+            return 1;
+        if (getX() < position.getX())
+            return -1;
+        if (getY() > position.getY())
+            return 1;
+        if (getY() < position.getY())
+            return -1;
+        return 0;
+    }
+
+    // return the range between two objects
+    public boolean isInRange(Position c2, int range) {
+        return range >= this.range(c2);
+    }
 }

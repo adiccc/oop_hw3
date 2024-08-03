@@ -27,4 +27,7 @@ public class Health {
     public void heal() {
         current = capacity;
     }
+    public String toString() {
+        return current+"/"+capacity;
+    }
 }
