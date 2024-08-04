@@ -35,8 +35,6 @@ public class Mage extends Player   {
     public void specialAbility(){
         currentMana = currentMana - manaCost;
         int hits = 0;
-        while (hits<hitsCount ){
 
-        }
     }
 }

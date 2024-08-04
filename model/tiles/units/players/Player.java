@@ -83,4 +83,7 @@ public abstract class  Player extends Unit {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public void onTick() {
+    }
 }

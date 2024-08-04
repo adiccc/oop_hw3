@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public abstract class InputReader {
 
+
+
     public char readPlayerChoise(int numPlayersOptions){
         String playersOptions="[1-" + numPlayersOptions + "]";
         return readInput(playersOptions);

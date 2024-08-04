@@ -40,4 +40,6 @@ public class Board {
     public Map<Position, Tile> getBoard(){
         return board;
     }
+    public Player getPlayer(){return this.player;}
+    public List<Enemy> getEnemies(){return this.enemies;}
 }

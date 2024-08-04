@@ -34,7 +34,7 @@ public class Program
         instruction();
         int playerId=choosePlayer();
         LevelInitializer initializer=new LevelInitializer(playerId);
-        Game game=new Game(initializer,messageCallback);
+        Game game=new Game(initializer,messageCallback, inputReader);
     }
 
 
