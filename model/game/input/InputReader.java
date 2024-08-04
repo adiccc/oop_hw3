@@ -11,6 +11,11 @@ public abstract class InputReader {
         return readInput(playersOptions);
     }
 
+    public char readPlayerMove(){
+        String playersMove ="[" + InputProvider.getRegex() + "]";
+        return readInput(playersMove);
+    }
+
     protected abstract char readInput(String regex);
 
 }

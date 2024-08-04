@@ -1,7 +1,6 @@
 package model.game;
 
 import control.initializers.LevelInitializer;
-import model.game.input.InputReader;
 import utils.callbacks.MessageCallback;
 
 import java.io.File;
@@ -11,11 +10,9 @@ import java.util.List;
 
 public class Game {
     private MessageCallback messageCallback;
-    private InputReader inputReader;
-    public Game(LevelInitializer initializer, MessageCallback messageCallback , InputReader inputReader){
+    public Game(LevelInitializer initializer, MessageCallback messageCallback){
         this.messageCallback = messageCallback;
         initAllLevels("/Users/adicohen/Documents/oop_projects/hw3/Levels",initializer);
-        this.inputReader = inputReader;
     }
 
     private void initAllLevels(String path, LevelInitializer initializer){
@@ -29,7 +26,7 @@ public class Game {
         levelsFiles.sort((File f1,File f2)->f1.getName().compareTo(f2.getName()));
         for (File level : levelsFiles){
             initializer.initLevel(path+"/"+level.getName());
-            Level l=new Level(initializer.buildBord(),messageCallback, inputReader);
+            Level l=new Level(initializer.buildBord(),messageCallback);
         }
     }
 }

@@ -40,6 +40,7 @@ public class LevelInitializer {
         }
         int y = 0, x=0;
         for(String line : lines){
+            x=0;
             for(char c : line.toCharArray()){
                 Position position = new Position(x, y);
                 switch(c) {
