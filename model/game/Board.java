@@ -23,6 +23,7 @@ public class Board {
         for(Tile t : tiles){
             board.put(t.getPosition(), t);
         }
+        System.out.println(width+" width");
     }
 
     @Override

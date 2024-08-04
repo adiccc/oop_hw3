@@ -11,6 +11,7 @@ public class Level {
         this.messageCallback=messageCallback;
         this.board=board;
         startLevel();
+
     }
 
     private void startLevel() {
