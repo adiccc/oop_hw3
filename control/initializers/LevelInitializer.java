@@ -32,6 +32,7 @@ public class LevelInitializer {
         return new Board(tiles,player,enemies,width);
     }
     public void initLevel(String levelPath){
+        this.tiles=new ArrayList<>();
         List<String> lines;
         try {
             lines = Files.readAllLines(Paths.get(levelPath));
