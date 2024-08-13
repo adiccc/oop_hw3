@@ -12,9 +12,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Program program = new Program(s -> System.out.println(s),false);
+        Program program = new Program(s -> System.out.println(s));
         program.start();
-
-
     }
 }

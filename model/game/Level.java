@@ -1,5 +1,6 @@
 package model.game;
 
+import model.game.input.InputReader;
 import utils.callbacks.MessageCallback;
 
 public class Level {
@@ -7,7 +8,7 @@ public class Level {
     private Board board;
     private MessageCallback messageCallback;
 
-    public Level(Board board, MessageCallback messageCallback) {
+    public Level(Board board, MessageCallback messageCallback, InputReader inputReader) {
         this.messageCallback=messageCallback;
         this.board=board;
         startLevel();

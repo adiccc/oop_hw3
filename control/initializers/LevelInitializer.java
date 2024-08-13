@@ -5,6 +5,7 @@ import model.tiles.Tile;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.players.Player;
 import utils.Position;
+import utils.generators.Generator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,13 +20,15 @@ public class LevelInitializer {
     private List<Enemy> enemies;
     private List<Tile> tiles;
     private int width;
+    private Generator generator;
 
-    public LevelInitializer(int playerID){
+    public LevelInitializer(int playerID, Generator generator){
         this.tileFactory = new TileFactory();
         this.enemies = new ArrayList<>();
         this.tiles = new ArrayList<>();
         this.player=tileFactory.producePlayer(playerID);
         this.width=-1;
+        this.generator=generator;
     }
 
     public Board buildBord(){
@@ -56,7 +59,7 @@ public class LevelInitializer {
                         player.setPosition(position);
                         break;
                     default:
-                        Enemy e=this.tileFactory.produceEnemy(c,position,null,null,null);
+                        Enemy e=this.tileFactory.produceEnemy(c,position,null,generator,null);
                         this.tiles.add(e);
                         this.enemies.add(e);
                         break;
