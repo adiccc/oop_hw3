@@ -86,10 +86,10 @@ public abstract class Unit extends Tile {
         return health.toString();
     }
     public String getAttack(){
-        return attack+"";
+        return String.valueOf(attack);
     }
     public String getDefence(){
-        return defense+"";
+        return String.valueOf(defense);
     }
 
 }

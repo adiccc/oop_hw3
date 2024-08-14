@@ -9,19 +9,17 @@ public class Monster extends Enemy{
         this.visionRange = visionRange;
     }
 
-    private boolean isInRange(Position playerPosition){
+    protected boolean isInRange(Position playerPosition){
         return visionRange<=this.position.range(playerPosition);
     }
 
     @Override
     public void turn(Position playerPosition) {
-
+//        move(isInRange(playerPosition),playerPosition);
     }
 
-    //adis
-//    @Override
-//    public void turn(Position playerPosition){
-//        if(isInRange(playerPosition)){
+//    private void move(Boolean isInRange, Position playerPosition){
+//        if(isInRange){
 //            int dx=playerPosition.getX()-this.getPosition().getX();
 //            int dy=playerPosition.getY()-this.getPosition().getY();
 //            if(Math.abs(dx)>Math.abs(dy)) {
@@ -38,9 +36,6 @@ public class Monster extends Enemy{
 //            }
 //        }
 //        else
-//        {
-//            this.position.moveRandom();
-//        }
 //    }
 
 

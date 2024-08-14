@@ -5,7 +5,7 @@ import model.tiles.units.players.Player;
 import utils.Position;
 import utils.generators.Generator;
 
-public class Enemy extends Unit {
+public abstract class Enemy extends Unit {
     protected int experienceValue;
 
     public Enemy(char tile, String name, int hitPoints, int attack, int defense, int experienceValue) {
@@ -33,7 +33,7 @@ public class Enemy extends Unit {
         }
     }
 
-    public void turn(Position playerPosition) {
+    public abstract void turn(Position playerPosition);
 
-    }
+    protected abstract boolean isInRange(Position playerPosition);
 }

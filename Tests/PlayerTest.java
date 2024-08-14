@@ -41,6 +41,13 @@ public class PlayerTest {
         for (int i=0;i<7;i++)
             Assert.assertEquals("the properties of the input player number :"+i+" isn't match",tileFactory.producePlayer(i), playerTypes.get(i));
     }
+
+    // מעבר שלב
+    // ניצחון
+    // הפסד
+    // שימוש ביכולת
+
+
 //    @Test
 //    public void checkAllPlayersData() throws IOException {
 //        try {
