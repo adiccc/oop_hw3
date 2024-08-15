@@ -2,6 +2,7 @@
 import control.initializers.LevelInitializer;
 import control.initializers.TileFactory;
 import model.game.Program;
+import model.game.input.InputReaderScanncer;
 import model.tiles.Tile;
 import model.tiles.units.players.Mage;
 import model.tiles.units.players.Player;
@@ -39,7 +40,7 @@ public class PlayerTest {
                 () -> new Rogue("Bronn", 250,35,3,50)
         );
         for (int i=0;i<7;i++)
-            Assert.assertEquals("the properties of the input player number :"+i+" isn't match",tileFactory.producePlayer(i), playerTypes.get(i));
+            Assert.assertEquals("the properties of the input player number :"+i+" isn't match",tileFactory.producePlayer(i,new InputReaderScanncer()), playerTypes.get(i));
     }
 
     // מעבר שלב

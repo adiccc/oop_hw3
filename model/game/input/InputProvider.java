@@ -14,11 +14,17 @@ public enum InputProvider {
         this.key = key;
     }
 
+    InputProvider(int index) {
+        this.key=InputProvider.values()[index].toString();
+    }
+
     // getter method
     public String GetKey() {
         return this.key;
     }
 
+
+    //TODO : string builder
     public static String getRegex() {
         String regex = "";
         for (InputProvider inp : InputProvider.values()) {

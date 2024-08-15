@@ -1,5 +1,7 @@
 package model.tiles.units.players;
 
+import model.game.input.InputProvider;
+import model.game.input.InputReader;
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 import utils.Position;
@@ -15,11 +17,13 @@ public abstract class  Player extends Unit {
 
     protected int level;
     protected int experience;
+    protected InputReader inputReader;
 
-    public Player(String name, int hitPoints, int attack, int defense) {
+    public Player(String name, int hitPoints, int attack, int defense,InputReader inputReader) {
         super(PLAYER_TILE, name, hitPoints, attack, defense);
         this.level = 1;
         this.experience = 0;
+        this.inputReader = inputReader;
     }
 
     public void addExperience(int experienceValue){
@@ -87,6 +91,7 @@ public abstract class  Player extends Unit {
     }
 
     public void onTick(List<Enemy> enemies) {
+        char nextMove=this.inputReader.readPlayerMove();
 
     }
 }

@@ -22,9 +22,8 @@ public class Trap extends Enemy {
     @Override
     public void turn(Player player){
         updateVisibilty();
-        if(isInRange(player){
-            // battel with the player
-        }
+        if(isInRange(player))
+            battle(player);
     }
 
     private void updateVisibilty(){

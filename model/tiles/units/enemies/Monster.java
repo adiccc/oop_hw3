@@ -14,29 +14,37 @@ public class Monster extends Enemy{
         return visionRange<=this.position.range(player.getPosition());
     }
 
-    @Override
-    public void turn(Player player) {
-//        move(isInRange(playerPosition),playerPosition);
+    private void tryCombat(Player player){
+        if(this.position.range(player.getPosition())<=1)
+            battle(player);
     }
 
-//    private void move(Boolean isInRange, Position playerPosition){
-//        if(isInRange){
-//            int dx=playerPosition.getX()-this.getPosition().getX();
-//            int dy=playerPosition.getY()-this.getPosition().getY();
-//            if(Math.abs(dx)>Math.abs(dy)) {
-//                if (dx > 0)
-//                    this.position.moveLeft();
-//                else
-//                    this.position.moveRight();
-//            }
-//            else{
-//                if(dy>0)
-//                    this.position.moveUp();
-//                else
-//                    this.position.moveDown();
-//            }
-//        }
-//        else
-//    }
+    @Override
+    public void turn(Player player) {
+        Position newp=this.getPosition();
+        if(isInRange(player)){
+            tryCombat(player);
+            newp = chaisePlayer(player);
+        }
+        else {
+           int direction =generator.generate(5);
+        }
+
+    }
+
+    private Position chaisePlayer(Player player){
+        int direction=0;
+        int x =position.getX();
+        int y =position.getY();
+        if(player.getPosition().getX()>x)
+            x++;
+        else if(player.getPosition().getX()<x)
+            x--;
+        else if(player.getPosition().getY()>y)
+            y++;
+        else
+            y--;
+        return new Position(x, y);
+    }
 
 }
