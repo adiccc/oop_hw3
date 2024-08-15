@@ -4,6 +4,8 @@ import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 import utils.Position;
 
+import java.util.List;
+
 public abstract class  Player extends Unit {
     public static final char PLAYER_TILE = '@';
     protected static final int LEVEL_REQUIREMENT = 50;
@@ -77,13 +79,14 @@ public abstract class  Player extends Unit {
         //TODO: Implement onDeath
     }
 
-    public void newTick(){}
-    public void specialAbility(){}
+    public abstract void newTick();
+    public abstract void specialAbility();
 
     public void setPosition(Position position) {
         this.position = position;
     }
 
-    public void onTick() {
+    public void onTick(List<Enemy> enemies) {
+
     }
 }

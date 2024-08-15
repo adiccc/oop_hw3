@@ -1,4 +1,5 @@
 package model.tiles.units.enemies;
+import model.tiles.units.players.Player;
 import utils.Position;
 
 public class Monster extends Enemy{
@@ -9,12 +10,12 @@ public class Monster extends Enemy{
         this.visionRange = visionRange;
     }
 
-    protected boolean isInRange(Position playerPosition){
-        return visionRange<=this.position.range(playerPosition);
+    protected boolean isInRange(Player player){
+        return visionRange<=this.position.range(player.getPosition());
     }
 
     @Override
-    public void turn(Position playerPosition) {
+    public void turn(Player player) {
 //        move(isInRange(playerPosition),playerPosition);
     }
 
@@ -38,28 +39,4 @@ public class Monster extends Enemy{
 //        else
 //    }
 
-
-    // inbars
-//    public void turn(int turnCount) {
-//        super.turn(turnCount);
-//        List<Player> closePlayer = new ArrayList<>();
-//        closePlayer = TargetHandler.candidateTarget(this, this.getPosition(), visionRange);
-//        if (closePlayer.size() > 0) {
-//            int dx = this.getPosition().x - closePlayer.get(0).getPosition().x;
-//            int dy = this.getPosition().y - closePlayer.get(0).getPosition().y;
-//            if (Math.abs(dx) > Math.abs(dy)) {
-//                if (dx > 0)
-//                    this.move(InputProvider.Left);
-//                else
-//                    this.move(InputProvider.Right);
-//            } else {
-//                if (dy > 0)
-//                    this.move(InputProvider.Up);
-//                else
-//                    this.move(InputProvider.Down);
-//            }
-//        } else {
-//            this.move(rndArrs[(new Random().nextInt(5))]);
-//        }
-//    }
 }

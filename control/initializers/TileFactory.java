@@ -1,5 +1,6 @@
 package control.initializers;
 
+import model.game.input.InputReader;
 import model.tiles.Empty;
 import model.tiles.Tile;
 import model.tiles.Wall;
@@ -53,7 +54,7 @@ public class TileFactory {
 
     public int getNumPlayer(){return playerTypes.size();}
 
-    public Player producePlayer(int playerID){
+    public Player producePlayer(int playerID, InputReader inputReader){
         Supplier<Player> supp = playerTypes.get(playerID-1);
         this.p = supp.get();
         return this.p;

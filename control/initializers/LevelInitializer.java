@@ -1,6 +1,7 @@
 package control.initializers;
 
 import model.game.Board;
+import model.game.input.InputReader;
 import model.tiles.Tile;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.players.Player;
@@ -22,11 +23,11 @@ public class LevelInitializer {
     private int width;
     private Generator generator;
 
-    public LevelInitializer(int playerID, Generator generator){
+    public LevelInitializer(int playerID, Generator generator, InputReader inputReader){
         this.tileFactory = new TileFactory();
         this.enemies = new ArrayList<>();
         this.tiles = new ArrayList<>();
-        this.player=tileFactory.producePlayer(playerID);
+        this.player=tileFactory.producePlayer(playerID,inputReader);
         this.width=-1;
         this.generator=generator;
     }

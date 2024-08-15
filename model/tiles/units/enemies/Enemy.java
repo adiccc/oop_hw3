@@ -33,7 +33,7 @@ public abstract class Enemy extends Unit {
         }
     }
 
-    public abstract void turn(Position playerPosition);
+    public abstract void turn(Player player);
 
-    protected abstract boolean isInRange(Position playerPosition);
+    protected abstract boolean isInRange(Player player);
 }

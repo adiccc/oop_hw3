@@ -1,5 +1,6 @@
 package model.tiles.units.enemies;
 
+import model.tiles.units.players.Player;
 import utils.Position;
 
 public class Trap extends Enemy {
@@ -14,16 +15,15 @@ public class Trap extends Enemy {
         this.invisibiltyTime = invisibiltyTime;
     }
 
-    protected boolean isInRange(Position playerPosition){
-        return 2>=this.position.range(playerPosition);
+    protected boolean isInRange(Player player){
+        return 2>=this.position.range(player.getPosition());
     }
 
     @Override
-    public void turn(Position playerPosition){
+    public void turn(Player player){
         updateVisibilty();
-        if(isInRange(playerPosition)){
-//            wtf
-//            attack(playerPosition);
+        if(isInRange(player){
+            // battel with the player
         }
     }
 
