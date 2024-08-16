@@ -1,80 +1,69 @@
 
-import control.initializers.LevelInitializer;
 import control.initializers.TileFactory;
-import model.game.Board;
-import model.game.Program;
+import model.game.input.InputProvider;
 import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;
-import model.tiles.Tile;
 import model.tiles.units.enemies.Enemy;
-import model.tiles.units.players.Mage;
 import model.tiles.units.players.Player;
-import model.tiles.units.players.Rogue;
-import model.tiles.units.players.Warrior;
 import org.junit.Test;
 import org.junit.Assert;
 import utils.Position;
-import utils.callbacks.MessageCallback;
 import utils.generators.FixedGenerator;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
 public class PlayerTest {
 
-
-    MessageCallback messageCallback=(x)->System.out.println(x);
-
-    @Test
-    public void checkAllPlayersData(){
-        TileFactory tileFactory=new TileFactory();
-        List<Supplier<Player>> playerTypes = Arrays.asList(
-                () -> new Warrior("Jon Snow", 300,30,4,3),
-                () -> new Warrior("The Hound", 400,20,6,5),
-                () -> new Mage("Melisandre", 100,5,1,300,30,15,5,6),
-                () -> new Mage("Thoros of Myr",250,25,4,150,20,20,3,4),
-                () -> new Rogue("Arya Stark",150,40,2,20),
-                () -> new Rogue("Bronn", 250,35,3,50)
-        );
-        for (int i=0;i<7;i++)
-            Assert.assertEquals("the properties of the input player number :"+i+" isn't match",tileFactory.producePlayer(i,new InputReaderScanncer()), playerTypes.get(i));
-    }
-
-
-
+    //TODO :
     // מעבר שלב
-    // ניצחון
-    // הפסד
+    // ניצחון סופי
+    // on death
     // שימוש ביכולת
 
+    @Test
+    public void onTick(){
+        TileFactory tileFactory=new TileFactory();
+        Player p=tileFactory.producePlayer(1,new InputReaderFile("./Tests/TestFiles/playerOnTick.txt"));
+        p.initialize(new Position(0,0),new FixedGenerator(),null,null);
+        Assert.assertEquals("the user input doesnt match the requested player move", InputProvider.Up.GetKey(),p.onTick().GetKey());
+    }
 
-//    @Test
-//    public void checkAllPlayersData() throws IOException {
-//        try {
-//            File myObj = new File("PlayerDataVlidation.txt");
-//            FileWriter writer = new FileWriter("PlayerDataVlidation.txt");
-//            for (int i=1;i<7;i++){
-//                    myObj = new File("PlayerDataVlidation.txt");
-//                    writer = new FileWriter("PlayerDataVlidation.txt");
-//                    writer.write(String.valueOf(i));
-//                    writer.close();
-//                    playerDataValidation();
-//            }
-//
-//        } catch (IOException e) {
-////            System.out.println("An error occurred.");
-//        }
-//    }
-//
-//    private void playerDataValidation(){
-//
-//    }
+    @Test
+    public void playerTookDemage(){
+        TileFactory tileFactory=new TileFactory();
+        Player player=tileFactory.producePlayer(1,new InputReaderScanncer());
+        Enemy enemy=tileFactory.produceEnemy('M');
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
+        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.battle(player);
+        Assert.assertTrue("player '2' died after a battel with enemy 'M' and he shouldn't have", player.alive());
+        Assert.assertEquals("player should take 27 heath demage and didnt ","272/300",player.getHealth());
+    }
+
+    @Test
+    public void playerWonEnemyAttack(){
+        TileFactory tileFactory=new TileFactory();
+        Player player=tileFactory.producePlayer(2,new InputReaderScanncer());
+        Enemy enemy=tileFactory.produceEnemy('B');
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
+        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.battle(player);
+        Assert.assertTrue("player '2' died after a battel with enemy 'B' and he shouldn't have", player.alive());
+        Assert.assertEquals("player shouldnt take damage ","400/400",player.getHealth());
+    }
+
+    @Test
+    public void playerWonItsAttack(){
+        TileFactory tileFactory=new TileFactory();
+        Player player=tileFactory.producePlayer(6,new InputReaderScanncer());
+        Enemy enemy=tileFactory.produceEnemy('s');
+        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
+        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        player.visit(enemy);
+        player.visit(enemy);
+        player.visit(enemy);
+        player.visit(enemy);
+        player.visit(enemy);
+        Assert.assertEquals("player should gain experience of the battle winning ",25,player.getExperience());
+        Assert.assertEquals("player should get the enemy position","(0, 0)",player.getPosition().toString());
+    }
+
 }

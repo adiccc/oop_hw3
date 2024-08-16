@@ -41,6 +41,19 @@ public class BoardTest {
 
     @Test
     public void removeEnemy(){
-        //TODO:this
+        Board board = new Board();
+        TileFactory tileFactory=new TileFactory();
+        Enemy e=tileFactory.produceEnemy('B');
+        e.initialize(new Position(1,0),new FixedGenerator(),()-> board.removeEnemy(e,tileFactory.produceEmpty(new Position(-1,-1))),null);
+        Player p= tileFactory.producePlayer(1,new InputReaderScanncer());
+        p.initialize(new Position(1,1),new FixedGenerator(),null,null);
+        List<Tile> tiles=new ArrayList<>();
+        tiles.add(e);
+        tiles.add(p);
+        List<Enemy> enemies=new ArrayList<>();
+        enemies.add(e);
+        board.build(tiles,p,enemies,2);
+        p.visit(e);
+        Assert.assertEquals("the enemy wasn't remove after killed in a battle",0,board.getEnemies().size());
     }
 }

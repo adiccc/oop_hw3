@@ -67,16 +67,20 @@ public class Board {
         }
         if(!specialAbility){
             Position newPosition = new Position(nx, ny);
-            if(isLegalPosition(newPosition)){
-                board.get(newPosition).accept(u);
-                if(u.getPosition().equals(newPosition))
-                    swapPosition(u,board.get(newPosition));
-            }
+            interactTiles(u, newPosition);
         }
         if(specialAbility){
             player.specialAbility(enemies);
         }
         specialAbility = false;
+    }
+
+    private void interactTiles(Unit u,Position newPosition){
+        if(isLegalPosition(newPosition)){
+            board.get(newPosition).accept(u);
+            if(u.getPosition().equals(newPosition))
+                swapPosition(u,board.get(newPosition));
+        }
     }
 
     private void swapPosition(Unit u, Tile t){
@@ -99,7 +103,5 @@ public class Board {
     }
     public Player getPlayer(){return this.player;}
     public List<Enemy> getEnemies(){return this.enemies;}
-
-
 
 }
