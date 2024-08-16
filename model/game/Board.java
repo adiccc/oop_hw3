@@ -1,6 +1,5 @@
 package model.game;
 
-import control.initializers.TileFactory;
 import model.game.input.InputProvider;
 import model.tiles.Tile;
 import model.tiles.units.Unit;
@@ -43,7 +42,6 @@ public class Board {
         return sb.toString();
     }
 
-
     public void moveTile(Unit u, InputProvider direction){
         int nx = u.getPosition().getX();
         int ny = u.getPosition().getY();
@@ -71,33 +69,30 @@ public class Board {
             Position newPosition = new Position(nx, ny);
             if(isLegalPosition(newPosition)){
                 board.get(newPosition).accept(u);
+                if(u.getPosition().equals(newPosition))
+                    swapPosition(u,board.get(newPosition));
             }
         }
         if(specialAbility){
             player.specialAbility(enemies);
         }
-
-
-
         specialAbility = false;
     }
 
-    public boolean isLegalPosition(Position p){
+    private void swapPosition(Unit u, Tile t){
+        board.replace(u.getPosition(), u);
+        board.replace(t.getPosition(), t);
+    }
+
+    private boolean isLegalPosition(Position p){
         return board.containsKey(p);
     }
-
-    public Tile getTile(Position pos){
-        return board.get(pos);
-    }
-
 
     public void removeEnemy(Enemy e, Tile tile){
         enemies.remove(e);
         e.swapPosition(tile);
         board.remove(e.getPosition());
     }
-
-
 
     public Map<Position, Tile> getBoard(){
         return board;

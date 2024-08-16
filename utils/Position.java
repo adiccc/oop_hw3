@@ -34,6 +34,20 @@ public class Position implements Comparable<Position> {
         return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Position){
+            return compareTo((Position)o)==0;
+        }
+       return false;
+    }
+
+    //TODO delete this function
+    @Override
+    public String toString(){
+        return "(" + x + ", " + y + ")";
+    }
+
     // return the range between two objects
     public boolean isInRange(Position c2, int range) {
         return range >= this.range(c2);

@@ -27,6 +27,10 @@ public abstract class Tile {
         return String.valueOf(tile);
     }
 
+    public void setTile(char tile) {
+        this.tile = tile;
+    }
+
     public abstract void accept(Unit unit);
 
     public Position getPosition() {

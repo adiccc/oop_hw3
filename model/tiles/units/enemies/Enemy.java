@@ -1,5 +1,8 @@
 package model.tiles.units.enemies;
 
+import model.game.input.InputProvider;
+import model.tiles.Empty;
+import model.tiles.Wall;
 import model.tiles.units.Unit;
 import model.tiles.units.players.Player;
 import utils.Position;
@@ -24,6 +27,15 @@ public abstract class Enemy extends Unit {
 
     public void visit(Enemy e){
         // Do nothing
+        System.out.println("- ");
+    }
+
+    public void visit(Wall w){
+        // Do nothing
+    }
+
+    public void visit(Empty empty){
+        swapPosition(empty);
     }
 
     public void visit(Player p){
@@ -33,7 +45,7 @@ public abstract class Enemy extends Unit {
         }
     }
 
-    public abstract void turn(Player player);
+    public abstract InputProvider turn(Player player);
 
     protected abstract boolean isInRange(Player player);
 }

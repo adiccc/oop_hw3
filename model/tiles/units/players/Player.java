@@ -2,6 +2,8 @@ package model.tiles.units.players;
 
 import model.game.input.InputProvider;
 import model.game.input.InputReader;
+import model.tiles.Empty;
+import model.tiles.Wall;
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 import utils.Position;
@@ -74,11 +76,16 @@ public abstract class  Player extends Unit {
             addExperience(e.experienceValue());
             this.swapPosition(e);
             e.onDeath();
-
         }
     }
 
+    public void visit(Wall w){
+        // Do nothing
+    }
 
+    public void visit(Empty empty){
+        swapPosition(empty);
+    }
 
     @Override
     public void onDeath() {

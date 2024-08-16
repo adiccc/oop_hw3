@@ -1,49 +1,43 @@
 package model.tiles.units.enemies;
+import model.game.input.InputProvider;
 import model.tiles.units.players.Player;
 import utils.Position;
 
 public class Monster extends Enemy{
     private int visionRange;
 
-    public Monster(char tile, String name, int hitPoints, int attack, int defense, int experienceValue, int visionRange) {
+    public Monster(char tile, String name, int hitPoints, int attack, int defense, int visionRange, int  experienceValue) {
         super(tile, name, hitPoints, attack, defense, experienceValue);
         this.visionRange = visionRange;
     }
 
     protected boolean isInRange(Player player){
-        return visionRange<=this.position.range(player.getPosition());
-    }
-
-    private void tryCombat(Player player){
-        if(this.position.range(player.getPosition())<=1)
-            battle(player);
+        return visionRange>=this.position.range(player.getPosition());
     }
 
     @Override
-    public void turn(Player player) {
-        Position newp=this.getPosition();
+    public InputProvider turn(Player player) {
         if(isInRange(player)){
-            tryCombat(player);
-            newp = chaisePlayer(player);
+            return chaisePlayer(player);
         }
         else {
            int direction =generator.generate(5);
+           if(direction==4){direction++;}
+           return InputProvider.values()[direction];
         }
     }
 
-    private Position chaisePlayer(Player player){
-        int direction=0;
+    private InputProvider chaisePlayer(Player player){
         int x =position.getX();
         int y =position.getY();
         if(player.getPosition().getX()>x)
-            x++;
+            return InputProvider.Right;
         else if(player.getPosition().getX()<x)
-            x--;
+            return InputProvider.Left;
         else if(player.getPosition().getY()>y)
-            y++;
+            return InputProvider.Up;
         else
-            y--;
-        return new Position(x, y);
+            return InputProvider.Down;
     }
 
     @Override

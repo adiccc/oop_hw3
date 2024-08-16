@@ -31,14 +31,13 @@ public class Level {
             if (isPlayerTurn){
                 InputProvider playerMove = player.onTick();
                 board.moveTile(player, playerMove);
-
             }
 
                 // enemies turn
             else {
                 if (player.alive()) {
                     for (Enemy e : enemies)
-                        e.turn(player);
+                        board.moveTile(e,e.turn(player));
                 }
             }
             isPlayerTurn = !isPlayerTurn;
