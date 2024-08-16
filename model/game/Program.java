@@ -44,9 +44,4 @@ public class Program
         Game game=new Game(initializer,messageCallback);
     }
 
-
-
-
-
-
 }
