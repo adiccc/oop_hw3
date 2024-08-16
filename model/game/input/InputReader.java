@@ -12,6 +12,8 @@ public abstract class InputReader {
         return readInput(playersMove);
     }
 
+
+
     protected abstract char readInput(String regex);
 
 }

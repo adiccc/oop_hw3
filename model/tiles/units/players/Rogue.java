@@ -1,5 +1,9 @@
 package model.tiles.units.players;
 
+import model.tiles.units.enemies.Enemy;
+
+import java.util.List;
+
 public class Rogue extends Player {
     private int energy;
     private int cost;
@@ -22,7 +26,22 @@ public class Rogue extends Player {
     public void newTick(){
        currentEnergy = Math.min(currentEnergy+10, 100);
     }
-    public void specialAbility(){
+
+    @Override
+    public void visit(Player p) {
+
+    }
+
+
+    public void specialAbility(List<Enemy> enemies) {
+        for (Enemy e : enemies){
+            if(e.getPosition().range(this.position)<=2){
+                currentEnergy = currentEnergy - cost;
+                this.battle(e);
+            }
+
+
+        }
 
     }
 

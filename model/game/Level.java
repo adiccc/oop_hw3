@@ -1,5 +1,6 @@
 package model.game;
 
+import model.game.input.InputProvider;
 import model.game.input.InputReader;
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
@@ -27,8 +28,12 @@ public class Level {
         messageCallback.send(board.toString());
         while (player.alive() && !enemies.isEmpty()) {
             // player's turn
-            if (isPlayerTurn)
-                player.onTick(enemies);
+            if (isPlayerTurn){
+                InputProvider playerMove = player.onTick();
+                board.moveTile(player, playerMove);
+
+            }
+
                 // enemies turn
             else {
                 if (player.alive()) {

@@ -33,4 +33,9 @@ public class Trap extends Enemy {
         else
             tickCount++;
     }
+
+    @Override
+    public void newTick() {
+
+    }
 }

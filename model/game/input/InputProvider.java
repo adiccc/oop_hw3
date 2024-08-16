@@ -10,7 +10,7 @@ public enum InputProvider {
 
     private String key;
 
-    InputProvider(String key) {
+     InputProvider(String key) {
         this.key = key;
     }
 

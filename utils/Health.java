@@ -19,6 +19,9 @@ public class Health {
     public int getCurrent() {
         return current;
     }
+    public void updateCurrentHealthOnCast(int defense) {
+        current = Math.min(current  + (10*defense), capacity);
+    }
 
     public void increaseMax(int healthGain) {
         capacity += healthGain;
@@ -29,5 +32,9 @@ public class Health {
     }
     public String toString() {
         return current+"/"+capacity;
+    }
+
+    public int getCapacity() {
+        return this.capacity;
     }
 }

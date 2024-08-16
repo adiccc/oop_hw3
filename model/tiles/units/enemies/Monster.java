@@ -47,4 +47,8 @@ public class Monster extends Enemy{
         return new Position(x, y);
     }
 
+    @Override
+    public void newTick() {
+
+    }
 }

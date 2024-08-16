@@ -1,5 +1,11 @@
 package model.tiles.units.players;
 
+import model.tiles.units.enemies.Enemy;
+
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 public class Mage extends Player   {
     private int remainingCoolDown ;
     private int abilityCoolDown;
@@ -32,9 +38,33 @@ public class Mage extends Player   {
     public void newTick(){
         currentMana = Math.min((currentMana+1)*level,manaPool);
     }
-    public void specialAbility(){
+
+    @Override
+    public void visit(Player p) {
+
+    }
+    
+
+    public void specialAbility(List<Enemy> enemies) {
         currentMana = currentMana - manaCost;
         int hits = 0;
 
+        List<Enemy> enemiesInRange = enemies.stream()
+                .filter(e -> e.getPosition().range(this.position) <=  this.spellPower)
+                .toList();
+        while (hits<hitsCount&& !enemiesInRange.isEmpty()) {
+            Random random = new Random();
+            Enemy enemy = enemiesInRange.get(random.nextInt(enemiesInRange.size()));
+            enemy.battleSpecialAbility(spellPower,enemy.defend());
+            hits= hits + 1;
+        }
+
+
+
+        }
+
     }
+
+
+
 }

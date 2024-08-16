@@ -19,11 +19,11 @@ public abstract class  Player extends Unit {
     protected int experience;
     protected InputReader inputReader;
 
-    public Player(String name, int hitPoints, int attack, int defense,InputReader inputReader) {
+    public Player(String name, int hitPoints, int attack, int defense) {
         super(PLAYER_TILE, name, hitPoints, attack, defense);
         this.level = 1;
         this.experience = 0;
-        this.inputReader = inputReader;
+
     }
 
     public void addExperience(int experienceValue){
@@ -66,17 +66,19 @@ public abstract class  Player extends Unit {
         unit.visit(this);
     }
 
-    public void visit(Player p){
-        // Do nothing
-    }
+
 
     public void visit(Enemy e){
         battle(e);
         if(!e.alive()){
             addExperience(e.experienceValue());
+            this.swapPosition(e);
             e.onDeath();
+
         }
     }
+
+
 
     @Override
     public void onDeath() {
@@ -84,14 +86,19 @@ public abstract class  Player extends Unit {
     }
 
     public abstract void newTick();
-    public abstract void specialAbility();
+    public abstract void specialAbility(List<Enemy> enemies);
 
     public void setPosition(Position position) {
         this.position = position;
     }
 
-    public void onTick(List<Enemy> enemies) {
-        char nextMove=this.inputReader.readPlayerMove();
+    public InputProvider onTick() {
+        String playersMove = String.valueOf(inputReader.readPlayerMove());
+        return InputProvider.FindByKey(playersMove);
+    }
 
+
+    public void setInputReader(InputReader inputReader) {
+        this.inputReader = inputReader;
     }
 }

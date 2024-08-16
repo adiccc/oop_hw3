@@ -1,5 +1,10 @@
 package model.tiles.units.players;
 
+import model.tiles.units.Unit;
+import model.tiles.units.enemies.Enemy;
+
+import java.util.List;
+
 public class Warrior extends Player{
     private int abilityCoolDown; // Represents the number of game ticks required to pass before the warrior can cast the ability again
     private int remainingCoolDown; //Represents the number of ticks remained until the warrior can cast its special ability
@@ -31,6 +36,28 @@ public class Warrior extends Player{
     public void newTick(){
         remainingCoolDown--;
     }
+
+    @Override
+    public void visit(Player p) {
+
+    }
+
+    @Override
+    public void specialAbility(List<Enemy> enemies) {
+        for (Enemy e : enemies){
+           if(e.getPosition().range(this.position)<=3){
+               remainingCoolDown = abilityCoolDown;
+               health.updateCurrentHealthOnCast(defense);
+                   e.battleSpecialAbility((int)(health.getCapacity()*0.1),e.defend());
+                   return;
+           }
+
+
+        }
+
+    }
+
+
 //    @Override
 //    public void specialAbility(){
 //        remainingCoolDown = abilityCoolDown;

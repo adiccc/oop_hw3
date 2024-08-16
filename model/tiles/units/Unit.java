@@ -11,6 +11,8 @@ import utils.callbacks.DeathCallback;
 import utils.callbacks.MessageCallback;
 import utils.generators.Generator;
 
+import java.util.List;
+
 public abstract class Unit extends Tile {
     protected String name;
     protected Health health;
@@ -48,6 +50,8 @@ public abstract class Unit extends Tile {
     public boolean alive(){
         return health.getCurrent() > 0;
     }
+    public abstract void newTick();
+
 
     public void battle(Unit enemy) {
         int attack = this.attack();
@@ -55,12 +59,15 @@ public abstract class Unit extends Tile {
         int damageTaken = enemy.health.takeDamage(attack - defense);
     }
 
+
+
     public void interact(Tile t){
         t.accept(this);
     }
 
     public void visit(Empty e){
-        swapPosition(e);
+        this.swapPosition(e);
+        this.newTick();
     }
 
     public void visit(Wall w){
@@ -69,6 +76,7 @@ public abstract class Unit extends Tile {
 
     public abstract void visit(Player p);
     public abstract void visit(Enemy e);
+
 
     public void onDeath(){
         deathCallback.onDeath();
@@ -92,4 +100,9 @@ public abstract class Unit extends Tile {
         return String.valueOf(defense);
     }
 
+
+    public void battleSpecialAbility(int attack, int defense) {
+        this.health.takeDamage(attack - defense);
+
+    }
 }
