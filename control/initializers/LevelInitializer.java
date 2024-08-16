@@ -6,6 +6,8 @@ import model.tiles.Tile;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.players.Player;
 import utils.Position;
+import utils.callbacks.DeathCallback;
+import utils.callbacks.MessageCallback;
 import utils.generators.Generator;
 
 import java.io.IOException;
@@ -22,8 +24,12 @@ public class LevelInitializer {
     private List<Tile> tiles;
     private int width;
     private Generator generator;
+    private Board board;
+    private MessageCallback messageCallback;
 
-    public LevelInitializer(int playerID, Generator generator, InputReader inputReader){
+    public LevelInitializer(int playerID, Generator generator, InputReader inputReader, MessageCallback messageCallback){
+        this.messageCallback=messageCallback;
+        this.board=new Board();
         this.tileFactory = new TileFactory();
         this.enemies = new ArrayList<>();
         this.tiles = new ArrayList<>();
@@ -33,7 +39,7 @@ public class LevelInitializer {
     }
 
     public Board buildBord(){
-        return new Board(tiles,player,enemies,width);
+        return board.build(tiles,player,enemies,width);
     }
     public void initLevel(String levelPath){
         this.tiles=new ArrayList<>();
@@ -56,11 +62,12 @@ public class LevelInitializer {
                         this.tiles.add(this.tileFactory.produceWall(position));
                         break;
                     case '@':
-                        this.tiles.add(this.tileFactory.producePlayer());
+                        this.tiles.add(this.tileFactory.producePlayer(position));
                         player.setPosition(position);
                         break;
                     default:
-                        Enemy e=this.tileFactory.produceEnemy(c,position,null,generator,null);
+                        Enemy e=this.tileFactory.produceEnemy(c);
+                        e.initialize(position,generator,()-> board.removeEnemy(e,this.tileFactory.produceEmpty(new Position(-1,-1))),messageCallback);
                         this.tiles.add(e);
                         this.enemies.add(e);
                         break;

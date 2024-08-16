@@ -23,7 +23,7 @@ public class Trap extends Enemy {
     public void turn(Player player){
         updateVisibilty();
         if(isInRange(player))
-            battle(player);
+            accept(player);
     }
 
     private void updateVisibilty(){

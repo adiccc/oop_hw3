@@ -1,9 +1,12 @@
 
 import control.initializers.LevelInitializer;
 import control.initializers.TileFactory;
+import model.game.Board;
 import model.game.Program;
+import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;
 import model.tiles.Tile;
+import model.tiles.units.enemies.Enemy;
 import model.tiles.units.players.Mage;
 import model.tiles.units.players.Player;
 import model.tiles.units.players.Rogue;
@@ -11,6 +14,7 @@ import model.tiles.units.players.Warrior;
 import org.junit.Test;
 import org.junit.Assert;
 import utils.Position;
+import utils.callbacks.MessageCallback;
 import utils.generators.FixedGenerator;
 
 import java.io.File;
@@ -18,15 +22,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public class PlayerTest {
-    public void setUp(int number){
-        Program program=new Program((x)->System.err.println(x),"path");
-    }
+
+
+    MessageCallback messageCallback=(x)->System.out.println(x);
 
     @Test
     public void checkAllPlayersData(){
@@ -42,6 +47,8 @@ public class PlayerTest {
         for (int i=0;i<7;i++)
             Assert.assertEquals("the properties of the input player number :"+i+" isn't match",tileFactory.producePlayer(i,new InputReaderScanncer()), playerTypes.get(i));
     }
+
+
 
     // מעבר שלב
     // ניצחון

@@ -29,7 +29,6 @@ public class Monster extends Enemy{
         else {
            int direction =generator.generate(5);
         }
-
     }
 
     private Position chaisePlayer(Player player){

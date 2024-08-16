@@ -1,5 +1,6 @@
 package control.initializers;
 
+import model.game.Board;
 import model.game.input.InputReader;
 import model.tiles.Empty;
 import model.tiles.Tile;
@@ -25,7 +26,7 @@ import java.util.function.Supplier;
 
 public class TileFactory {
     private Player p;
-    private static final List<Supplier<Player>> playerTypes = Arrays.asList(
+    public static final List<Supplier<Player>> playerTypes = Arrays.asList(
             () -> new Warrior("Jon Snow", 300,30,4,3),
             () -> new Warrior("The Hound", 400,20,6,5),
             () -> new Mage("Melisandre", 100,5,1,300,30,15,5,6),
@@ -61,13 +62,13 @@ public class TileFactory {
         return this.p;
     }
 
-    public Player producePlayer(){
+    public Player producePlayer(Position position){
+        p.setPosition(position);
         return this.p;
     }
 
-    public Enemy produceEnemy(char tile, Position p, DeathCallback c, Generator g, MessageCallback m){
+    public Enemy produceEnemy(char tile){
         Enemy e = enemyTypes.get(tile).get();
-        e.initialize(p, g, c, m);
         return e;
     }
 

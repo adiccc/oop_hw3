@@ -24,7 +24,6 @@ public class Mage extends Player   {
         this.spellPower = spellPower;
         this.hitsCount = hitsCount;
         this.abilityRange = abilityRange;
-
     }
 
     @Override

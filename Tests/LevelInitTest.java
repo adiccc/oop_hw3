@@ -17,7 +17,7 @@ public class LevelInitTest {
 
     @Test
     public void unitPosition() {
-        LevelInitializer levelInitializer=new LevelInitializer(1,new FixedGenerator(),new InputReaderScanncer());
+        LevelInitializer levelInitializer=new LevelInitializer(1,new FixedGenerator(),new InputReaderScanncer(),(x)-> System.out.println(x));
         for (int i=1;i<=4;i++){
             String levelPath="./Levels/level"+i+".txt";
             levelInitializer.initLevel(levelPath);

@@ -16,15 +16,19 @@ public class Board {
     private Map<Position, Tile> board;
     private Player player;
     private List<Enemy> enemies;
-    private final int width;
+    private int width;
 
-    public Board(List<Tile> tiles, Player p, List<Enemy> enemies, int width){
+    public Board(){
+    }
+
+    public Board build(List<Tile> tiles, Player p, List<Enemy> enemies, int width){
         this.player = p;
         this.enemies = enemies;
         this.width = width;
         this.board = new TreeMap<>();
         for(Tile t : tiles)
             board.put(t.getPosition(), t);
+        return this;
     }
 
     @Override
@@ -87,10 +91,10 @@ public class Board {
     }
 
 
-    public void removeEnemy(Enemy e){
+    public void removeEnemy(Enemy e, Tile tile){
         enemies.remove(e);
+        e.swapPosition(tile);
         board.remove(e.getPosition());
-        // TODO: need to fill the position of e with emptyTile
     }
 
 
