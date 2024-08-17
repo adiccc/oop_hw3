@@ -22,7 +22,7 @@ public class Game {
         File f = new File(path);
         File[] matchingFiles = f.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {
-                return  name.endsWith("txt");
+                return name.endsWith("txt");
             }
         });
         List<File> levelsFiles= Arrays.asList(matchingFiles);
@@ -31,5 +31,6 @@ public class Game {
             initializer.initLevel(path+"/"+level.getName());
             Level l=new Level(initializer.buildBord(),messageCallback);
         }
+        messageCallback.send("You won!");
     }
 }

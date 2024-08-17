@@ -94,8 +94,8 @@ public class Board {
 
     public void removeEnemy(Enemy e, Tile tile){
         enemies.remove(e);
-        e.swapPosition(tile);
-        board.remove(e.getPosition());
+        board.replace(e.getPosition(), tile);
+        tile.swapPosition(e);
     }
 
     public Map<Position, Tile> getBoard(){

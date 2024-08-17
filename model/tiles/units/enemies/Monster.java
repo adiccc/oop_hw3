@@ -31,13 +31,13 @@ public class Monster extends Enemy{
         int x =position.getX();
         int y =position.getY();
         if(player.getPosition().getX()>x)
-            return InputProvider.Right;
-        else if(player.getPosition().getX()<x)
             return InputProvider.Left;
+        else if(player.getPosition().getX()<x)
+            return InputProvider.Right;
         else if(player.getPosition().getY()>y)
-            return InputProvider.Up;
-        else
             return InputProvider.Down;
+        else
+            return InputProvider.Up;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class Trap extends Enemy {
     public InputProvider turn(Player player){
         updateVisibilty();
         if(isInRange(player))
-            accept(player);
+            player.accept(this);
         return InputProvider.Wait;
     }
 

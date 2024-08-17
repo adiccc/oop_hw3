@@ -44,6 +44,7 @@ public abstract class  Player extends Unit {
         health.heal();
         attack += attackGain;
         defense += defenseGain;
+        messageCallback.send(getName()+" reached level "+level+": +"+healthGain+" Health, +"+attackGain+" Attack, +"+defenseGain+" Defense ");
     }
 
     protected int levelRequirement(){
@@ -72,6 +73,7 @@ public abstract class  Player extends Unit {
         if(!e.alive()){
             addExperience(e.experienceValue());
             this.swapPosition(e);
+            messageCallback.send(getName()+" killed "+e.getName());
             e.onDeath();
         }
     }
