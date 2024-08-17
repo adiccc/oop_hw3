@@ -60,8 +60,6 @@ public abstract class Unit extends Tile {
 
     }
 
-
-
     public void interact(Tile t){
         t.accept(this);
     }

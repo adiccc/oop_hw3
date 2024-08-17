@@ -26,6 +26,7 @@ public class Level {
     private void startLevel() {
         boolean isPlayerTurn = true;
         messageCallback.send(board.toString());
+        messageCallback.send(player.description());
         while (player.alive() && !enemies.isEmpty()) {
             // player's turn
             if (isPlayerTurn){

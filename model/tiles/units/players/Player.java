@@ -25,6 +25,7 @@ public abstract class  Player extends Unit {
         super(PLAYER_TILE, name, hitPoints, attack, defense);
         this.level = 1;
         this.experience = 0;
+        messageCallback.send("you have selected : "+name);
     }
 
     public void addExperience(int experienceValue){
