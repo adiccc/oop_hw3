@@ -14,10 +14,6 @@ public enum InputProvider {
         this.key = key;
     }
 
-    InputProvider(int index) {
-        this.key=InputProvider.values()[index].toString();
-    }
-
     // getter method
     public String GetKey() {
         return this.key;
@@ -26,11 +22,11 @@ public enum InputProvider {
 
     //TODO : string builder
     public static String getRegex() {
-        String regex = "";
+        StringBuilder regex = new StringBuilder();
         for (InputProvider inp : InputProvider.values()) {
-            regex += inp.GetKey();
+            regex.append(inp.GetKey());
         }
-        return regex;
+        return regex.toString();
     }
 
     public static InputProvider FindByKey(String key) {

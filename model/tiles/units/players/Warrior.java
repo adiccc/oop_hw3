@@ -48,7 +48,7 @@ public class Warrior extends Player{
         if (remainingCoolDown <= 0) {
             int healthGain=-health.getCurrent()+health.updateCurrentHealthOnCast(defense);
             messageCallback.send(getName()+" used "+ABILITY_NAME+", healing for "+healthGain);
-            for (Enemy e : enemies) {
+             for (Enemy e : enemies) {
                 if (e.getPosition().range(this.position) <= 3) {
                     remainingCoolDown = abilityCoolDown;
                     int damageTaken=e.battleSpecialAbility((int) (health.getCapacity() * 0.1), e.defend());
@@ -62,7 +62,7 @@ public class Warrior extends Player{
             }
         }
         else{
-            messageCallback.send(getName()+" need to coolDown before using "+ABILITY_NAME);}
+            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is a cooldown: "+remainingCoolDown);}
     }
 
     public int getRemainingCoolDown() {

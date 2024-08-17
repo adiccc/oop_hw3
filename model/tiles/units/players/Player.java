@@ -73,8 +73,8 @@ public abstract class  Player extends Unit {
         if(!e.alive()){
             addExperience(e.experienceValue());
             this.swapPosition(e);
-            messageCallback.send(getName()+" killed "+e.getName());
             e.onDeath();
+            messageCallback.send(e.getName()+" died. "+getName()+" gained "+e.experienceValue()+" experience");
         }
     }
 

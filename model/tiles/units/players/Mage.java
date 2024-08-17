@@ -15,6 +15,7 @@ public class Mage extends Player   {
     private int spellPower;
     private int hitsCount;
     private int abilityRange;
+    private final String ABILITY_NAME="Blizzard";
 
 
     public Mage(String name, int hitPoints, int attack, int defense , int manaPool,int manaCost ,int spellPower, int hitsCount,int abilityRange) {
