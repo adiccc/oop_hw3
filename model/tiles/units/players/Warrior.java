@@ -44,20 +44,22 @@ public class Warrior extends Player{
 
     @Override
     public void specialAbility(List<Enemy> enemies) {
-        for (Enemy e : enemies){
-           if(e.getPosition().range(this.position)<=3){
-               remainingCoolDown = abilityCoolDown;
-               health.updateCurrentHealthOnCast(defense);
-                   e.battleSpecialAbility((int)(health.getCapacity()*0.1),e.defend());
-                   if(!e.alive()){
-                   addExperience(e.experienceValue());
-                   e.onDeath();
+        if (remainingCoolDown == 0) {
+            for (Enemy e : enemies) {
+                if (e.getPosition().range(this.position) <= 3) {
+                    remainingCoolDown = abilityCoolDown;
+                    health.updateCurrentHealthOnCast(defense);
+                    e.battleSpecialAbility((int) (health.getCapacity() * 0.1), e.defend());
+                    if (!e.alive()) {
+                        addExperience(e.experienceValue());
+                        e.onDeath();
 
-               }
-                   return;
-           }
+                    }
+                    return;
+                }
 
 
+            }
         }
 
     }
