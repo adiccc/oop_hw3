@@ -45,6 +45,7 @@ public abstract class  Player extends Unit implements HeroicUnit {
         health.heal();
         attack += attackGain;
         defense += defenseGain;
+        messageCallback.send(getName()+" reached level "+level+": +"+healthGain+" Health, +"+attackGain+" Attack, +"+defenseGain+" Defense ");
     }
 
     protected int levelRequirement(){
@@ -74,6 +75,7 @@ public abstract class  Player extends Unit implements HeroicUnit {
             addExperience(e.experienceValue());
             this.swapPosition(e);
             e.onDeath();
+            messageCallback.send(e.getName()+" died. "+getName()+" gained "+e.experienceValue()+" experience");
         }
     }
 
