@@ -30,7 +30,7 @@ public class TileFactory {
             () -> new Mage("Thoros of Myr",250,25,4,150,20,20,3,4),
             () -> new Rogue("Arya Stark",150,40,2,20),
             () -> new Rogue("Bronn", 250,35,3,50),
-            () -> new Barbarian("Bari", 250,10,3,15, 100)
+            () -> new Barbarian("Bari", 250,15,2,15, 100)
 
     );
 

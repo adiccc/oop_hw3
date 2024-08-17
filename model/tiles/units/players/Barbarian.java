@@ -38,7 +38,7 @@ public class Barbarian extends Player{
         if(currEnergy>costOfSpecialAbility){
             currEnergy -= costOfSpecialAbility;
             List<Enemy> enemiesInRange = enemies.stream()
-                    .filter(e -> e.getPosition().range(this.position) ==1)
+                    .filter(e -> e.getPosition().range(this.position) ==4)
                     .toList();
             Random random = new Random();
             Enemy enemy = enemiesInRange.get(random.nextInt(enemiesInRange.size()));
@@ -48,6 +48,10 @@ public class Barbarian extends Player{
                 enemy.onDeath();
             }
         }
+    }
+
+    public int getCurrEnergy(){
+        return currEnergy;
     }
 
 

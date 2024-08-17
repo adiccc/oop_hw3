@@ -5,10 +5,7 @@ import model.game.input.InputProvider;
 import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;
 import model.tiles.units.enemies.Enemy;
-import model.tiles.units.players.Mage;
-import model.tiles.units.players.Player;
-import model.tiles.units.players.Rogue;
-import model.tiles.units.players.Warrior;
+import model.tiles.units.players.*;
 import org.junit.Test;
 import org.junit.Assert;
 import utils.Position;
@@ -147,7 +144,24 @@ public class PlayerTest {
         player.specialAbility(enemies);
         Rogue r = (Rogue) player;
         Assert.assertEquals("Rogue should have 80 remainig cooldown",80,r.getCurrentEnergy());
-        Assert.assertEquals("","40/80",enemy.getHealth());
+        Assert.assertEquals("enemy should have 40/80 health: ","40/80",enemy.getHealth());
+
+    }
+
+    @Test
+    public void barbarianSpecialAbility(){
+        TileFactory tileFactory=new TileFactory();
+        Player player=tileFactory.producePlayer(7,new InputReaderScanncer());
+        Enemy enemy=tileFactory.produceEnemy('s'); // 80
+        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
+        player.initialize(new Position(0,4),new FixedGenerator(),null,null);
+        List<Enemy> enemies=new ArrayList<>();
+        enemies.add(enemy);
+        player.onTick();player.onTick();player.onTick();player.onTick();
+        player.specialAbility(enemies);
+        Barbarian bari = (Barbarian) player;
+        Assert.assertEquals("Bari should have 5 current energy ",5,bari.getCurrEnergy());
+        Assert.assertEquals("enemy should have 65/80 health:","65/80",enemy.getHealth());
 
     }
 
