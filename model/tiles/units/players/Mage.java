@@ -45,9 +45,7 @@ public class Mage extends Player   {
     
 
     public void specialAbility(List<Enemy> enemies) {
-
         int hits = 0;
-
         List<Enemy> enemiesInRange = enemies.stream()
                 .filter(e -> e.getPosition().range(this.position) <=  this.spellPower)
                 .toList();
@@ -65,10 +63,7 @@ public class Mage extends Player   {
         if (hits>0){
             currentMana = currentMana - manaCost;
         }
-
-
-
-        }
+    }
     public int getCurrmana() {
         return currentMana;
     }

@@ -7,7 +7,8 @@ import java.util.List;
 
 public class Warrior extends Player{
     private int abilityCoolDown; // Represents the number of game ticks required to pass before the warrior can cast the ability again
-    private int remainingCoolDown; //Represents the number of ticks remained until the warrior can cast its special ability
+    private int remainingCoolDown;//Represents the number of ticks remained until the warrior can cast its special ability
+    private final String ABILITY_NAME="Avenger's Shield";
 
     public Warrior(String name, int hitPoints, int attack, int defense, int abilityCoolDown ) {
         super(name, hitPoints, attack, defense);

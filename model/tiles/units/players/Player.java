@@ -110,7 +110,4 @@ public abstract class  Player extends Unit {
     public void setInputReader(InputReader inputReader) {
         this.inputReader = inputReader;
     }
-
-
-
 }

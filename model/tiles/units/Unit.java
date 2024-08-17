@@ -54,10 +54,18 @@ public abstract class Unit extends Tile {
 
 
     public void battle(Unit enemy) {
+        messageCallback.send(getName()+" engaged in combat with "+enemy.getName());
+        messageCallback.send(description());
+        messageCallback.send(enemy.description());
         int attack = this.attack();
         int defense = enemy.defend();
         int damageTaken = enemy.health.takeDamage(attack - defense);
-
+        messageCallback.send(getName()+" rolled "+attack+" attack points.");
+        messageCallback.send(enemy.getName()+" rolled "+defense+" defense points.");
+        if(damageTaken > 0)
+            messageCallback.send(getName()+" dealt "+damageTaken+" damage to "+enemy.getName());
+        else
+            messageCallback.send(getName()+ "did not dealt damage to "+enemy.getName());
     }
 
     public void interact(Tile t){
@@ -102,6 +110,5 @@ public abstract class Unit extends Tile {
 
     public void battleSpecialAbility(int attack, int defense) {
         this.health.takeDamage(attack - defense);
-
     }
 }
