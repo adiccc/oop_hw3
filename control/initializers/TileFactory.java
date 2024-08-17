@@ -9,10 +9,7 @@ import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.enemies.Monster;
 import model.tiles.units.enemies.Trap;
-import model.tiles.units.players.Mage;
-import model.tiles.units.players.Player;
-import model.tiles.units.players.Rogue;
-import model.tiles.units.players.Warrior;
+import model.tiles.units.players.*;
 import utils.Position;
 import utils.callbacks.DeathCallback;
 import utils.callbacks.MessageCallback;
@@ -32,7 +29,9 @@ public class TileFactory {
             () -> new Mage("Melisandre", 100,5,1,300,30,15,5,6),
             () -> new Mage("Thoros of Myr",250,25,4,150,20,20,3,4),
             () -> new Rogue("Arya Stark",150,40,2,20),
-            () -> new Rogue("Bronn", 250,35,3,50)
+            () -> new Rogue("Bronn", 250,35,3,50),
+            () -> new Barbarian("Bari", 250,10,3,15, 100)
+
     );
 
     private Map<Character, Supplier<Enemy>> enemyTypes;
