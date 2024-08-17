@@ -6,6 +6,7 @@ import model.tiles.Empty;
 import model.tiles.Tile;
 import model.tiles.Wall;
 import model.tiles.units.Unit;
+import model.tiles.units.enemies.Boss;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.enemies.Monster;
 import model.tiles.units.enemies.Trap;
@@ -30,7 +31,7 @@ public class TileFactory {
             () -> new Mage("Thoros of Myr",250,25,4,150,20,20,3,4),
             () -> new Rogue("Arya Stark",150,40,2,20),
             () -> new Rogue("Bronn", 250,35,3,50),
-            () -> new Barbarian("Bari", 250,15,2,15, 100)
+            () -> new Hunter("Ygritte", 220,30,2,6)
 
     );
 
@@ -44,9 +45,9 @@ public class TileFactory {
         enemyTypes.put('b', () -> new Monster('b', "Bear-Wright", 1000, 75, 30, 4, 250));
         enemyTypes.put('g', () -> new Monster('g', "Giant-Wright", 1500, 100, 40, 5, 500));
         enemyTypes.put('w', () -> new Monster('w', "White Walker", 2000, 150, 50, 6, 1000));
-        enemyTypes.put('M', () -> new Monster('M', "The Mountain", 1000, 60, 25, 6, 500));
-        enemyTypes.put('C', () -> new Monster('C', "Queen Cersei", 100, 10, 10, 1, 1000));
-        enemyTypes.put('K', () -> new Monster('K', "Night’s King", 5000, 300, 150, 8, 500));
+        enemyTypes.put('M', () -> new Boss('M', "The Mountain", 1000, 60, 25, 6, 500,5));
+        enemyTypes.put('C', () -> new Boss('C', "Queen Cersei", 100, 10, 10, 1, 1000,8));
+        enemyTypes.put('K', () -> new Boss('K', "Night’s King", 5000, 300, 150, 8, 500,3));
         enemyTypes.put('B', () -> new Trap('B', "Bonus Trap", 1,1,1,250,1,5));
         enemyTypes.put('Q', () -> new Trap('Q', "Queen’s Trap",250,50,10,100,3,7));
         enemyTypes.put('D', () -> new Trap('D', "Death Trap", 500,100,20,250,1,10));

@@ -70,7 +70,7 @@ public class Board {
             interactTiles(u, newPosition);
         }
         if(specialAbility){
-            player.specialAbility(enemies);
+            player.casAbility(enemies);
         }
         specialAbility = false;
     }

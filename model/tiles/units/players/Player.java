@@ -4,13 +4,14 @@ import model.game.input.InputProvider;
 import model.game.input.InputReader;
 import model.tiles.Empty;
 import model.tiles.Wall;
+import model.tiles.units.HeroicUnit;
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 import utils.Position;
 
 import java.util.List;
 
-public abstract class  Player extends Unit {
+public abstract class  Player extends Unit implements HeroicUnit {
     public static final char PLAYER_TILE = '@';
     protected static final int LEVEL_REQUIREMENT = 50;
     protected static final int HEALTH_GAIN = 10;

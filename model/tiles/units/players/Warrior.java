@@ -70,9 +70,8 @@ public class Warrior extends Player{
     }
 
 
-//    @Override
-//    public void specialAbility(){
-//        remainingCoolDown = abilityCoolDown;
-//        health.setCurrent(Math.min(health.getCurrent()+(10*level), health.getCapacity()));
-//    }
+    @Override
+    public <T> void casAbility(List<T> units) {
+        specialAbility((List<Enemy>) units);
+    }
 }

@@ -68,4 +68,8 @@ public class Mage extends Player   {
         return currentMana;
     }
 
+    @Override
+    public <T> void casAbility(List<T> units) {
+        specialAbility((List<Enemy>) units);
     }
+}

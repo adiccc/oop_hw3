@@ -34,22 +34,34 @@ public class Rogue extends Player {
 
 
     public void specialAbility(List<Enemy> enemies) {
-        currentEnergy = currentEnergy - cost;
-        for (Enemy e : enemies){
-            if(e.getPosition().range(this.position)<=2){
-                this.battleSpecialAbility(Integer.parseInt(this.getAttack()), e.defend());
-                if(!e.alive()){
-                    addExperience(e.experienceValue());
-                    e.onDeath();
-                }
-            }
-
-
+        if(currentEnergy <  cost) {
+            //your massage here;
         }
+        else{
+
+            for (Enemy e : enemies){
+                if(e.getPosition().range(this.position)<=2){
+                    currentEnergy = currentEnergy - cost;
+                    this.battleSpecialAbility(Integer.parseInt(this.getAttack()), e.defend());
+                    if(!e.alive()){
+                        addExperience(e.experienceValue());
+                        e.onDeath();
+                    }
+                }
+
+
+            }
+        }
+
 
     }
 
     public int getCurrentEnergy() {
         return currentEnergy;
+    }
+
+    @Override
+    public <T> void casAbility(List<T> units) {
+        specialAbility((List<Enemy>) units);
     }
 }

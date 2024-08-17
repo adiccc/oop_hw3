@@ -3,6 +3,8 @@ package model.tiles.units.enemies;
 import model.game.input.InputProvider;
 import model.tiles.units.players.Player;
 
+import java.util.List;
+
 public class Trap extends Enemy {
     private int visibiltyTime;
     private int invisibiltyTime;
@@ -44,6 +46,11 @@ public class Trap extends Enemy {
 
     @Override
     public void newTick() {
+
+    }
+
+    @Override
+    public <T> void casAbility(List<T> units) {
 
     }
 }

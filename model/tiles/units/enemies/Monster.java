@@ -3,6 +3,8 @@ import model.game.input.InputProvider;
 import model.tiles.units.players.Player;
 import utils.Position;
 
+import java.util.List;
+
 public class Monster extends Enemy{
     private int visionRange;
 
@@ -42,6 +44,11 @@ public class Monster extends Enemy{
 
     @Override
     public void newTick() {
+
+    }
+
+    @Override
+    public <T> void casAbility(List<T> units) {
 
     }
 }

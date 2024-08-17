@@ -15,16 +15,17 @@ public class Game {
 
     public Game(LevelInitializer initializer, MessageCallback messageCallback ){
         this.messageCallback = messageCallback;
-        initAllLevels("./Levels",initializer);
+        initAllLevels("C:\\Users\\edens\\Dnaguen\\oop_hw3\\Levels",initializer);
     }
 
     private void initAllLevels(String path, LevelInitializer initializer){
         File f = new File(path);
         File[] matchingFiles = f.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {
-                return  name.endsWith("txt");
+                return  name.endsWith(".txt");
             }
         });
+
         List<File> levelsFiles= Arrays.asList(matchingFiles);
         levelsFiles.sort((File f1,File f2)->f1.getName().compareTo(f2.getName()));
         for (File level : levelsFiles){
