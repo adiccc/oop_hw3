@@ -20,6 +20,7 @@ public class PreGame {
         instruction();
         viewPlayersOption();
         this.playerId=choosePlayer()-1;
+        messageCallback.send("you have selected : "+TileFactory.playerTypes.get(playerId).get().getName());
     }
 
     public int getPlayerId(){
@@ -39,7 +40,7 @@ public class PreGame {
     private void viewPlayersOption(){
         this.messageCallback.send("select player :");
         for(int i=0;i<TileFactory.playerTypes.size();i++){
-            this.messageCallback.send((TileFactory.playerTypes.indexOf(i)+1)+". "+TileFactory.playerTypes.get(i).get().description());
+            this.messageCallback.send((i+1)+". "+TileFactory.playerTypes.get(i).get().description());
         }
     }
 

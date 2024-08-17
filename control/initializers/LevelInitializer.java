@@ -63,7 +63,7 @@ public class LevelInitializer {
                         break;
                     case '@':
                         this.tiles.add(this.tileFactory.producePlayer(position));
-                        player.setPosition(position);
+                        player.initialize(position,generator,()->player.onDeath(),messageCallback);
                         break;
                     default:
                         Enemy e=this.tileFactory.produceEnemy(c);

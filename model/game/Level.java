@@ -25,11 +25,11 @@ public class Level {
 
     private void startLevel() {
         boolean isPlayerTurn = true;
-        messageCallback.send(board.toString());
-        messageCallback.send(player.description());
         while (player.alive() && !enemies.isEmpty()) {
             // player's turn
             if (isPlayerTurn){
+                messageCallback.send(board.toString());
+                messageCallback.send(player.description());
                 InputProvider playerMove = player.onTick();
                 board.moveTile(player, playerMove);
             }
@@ -42,6 +42,7 @@ public class Level {
                 }
             }
             isPlayerTurn = !isPlayerTurn;
+            this.enemies=board.getEnemies();
         }
     }
 }

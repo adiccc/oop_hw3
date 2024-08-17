@@ -27,7 +27,6 @@ public abstract class Enemy extends Unit {
 
     public void visit(Enemy e){
         // Do nothing
-        System.out.println("- ");
     }
 
     public void visit(Wall w){

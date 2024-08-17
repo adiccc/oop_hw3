@@ -15,7 +15,7 @@ public class Game {
 
     public Game(LevelInitializer initializer, MessageCallback messageCallback ){
         this.messageCallback = messageCallback;
-        initAllLevels("/Users/adicohen/Documents/oop_projects/hw3/Levels",initializer);
+        initAllLevels("./Levels",initializer);
     }
 
     private void initAllLevels(String path, LevelInitializer initializer){
