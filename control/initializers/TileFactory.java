@@ -56,7 +56,7 @@ public class TileFactory {
     public int getNumPlayer(){return playerTypes.size();}
 
     public Player producePlayer(int playerID, InputReader inputReader){
-        Supplier<Player> supp = playerTypes.get(playerID-1);
+        Supplier<Player> supp = playerTypes.get(playerID);
         this.p = supp.get();
         this.p.setInputReader(inputReader);
         return this.p;
