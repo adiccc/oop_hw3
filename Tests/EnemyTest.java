@@ -1,3 +1,5 @@
+package Tests;
+
 import control.initializers.TileFactory;
 import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;

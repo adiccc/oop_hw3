@@ -1,3 +1,5 @@
+package Tests;
+
 import control.initializers.LevelInitializer;
 import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;

@@ -34,10 +34,14 @@ public class Rogue extends Player {
 
 
     public void specialAbility(List<Enemy> enemies) {
+        currentEnergy = currentEnergy - cost;
         for (Enemy e : enemies){
             if(e.getPosition().range(this.position)<=2){
-                currentEnergy = currentEnergy - cost;
-                this.battle(e);
+                this.battleSpecialAbility(Integer.parseInt(this.getAttack()), e.defend());
+                if(!e.alive()){
+                    addExperience(e.experienceValue());
+                    e.onDeath();
+                }
             }
 
 
@@ -45,4 +49,7 @@ public class Rogue extends Player {
 
     }
 
+    public int getCurrentEnergy() {
+        return currentEnergy;
+    }
 }

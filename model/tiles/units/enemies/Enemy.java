@@ -48,4 +48,6 @@ public abstract class Enemy extends Unit {
     public abstract InputProvider turn(Player player);
 
     protected abstract boolean isInRange(Player player);
+
+
 }

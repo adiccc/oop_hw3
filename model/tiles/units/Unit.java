@@ -57,6 +57,7 @@ public abstract class Unit extends Tile {
         int attack = this.attack();
         int defense = enemy.defend();
         int damageTaken = enemy.health.takeDamage(attack - defense);
+
     }
 
 

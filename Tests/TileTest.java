@@ -1,3 +1,5 @@
+package Tests;
+
 import control.initializers.TileFactory;
 import model.tiles.Tile;
 import org.junit.Assert;

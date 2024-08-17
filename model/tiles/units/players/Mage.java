@@ -45,7 +45,7 @@ public class Mage extends Player   {
     
 
     public void specialAbility(List<Enemy> enemies) {
-        currentMana = currentMana - manaCost;
+
         int hits = 0;
 
         List<Enemy> enemiesInRange = enemies.stream()
@@ -55,11 +55,22 @@ public class Mage extends Player   {
             Random random = new Random();
             Enemy enemy = enemiesInRange.get(random.nextInt(enemiesInRange.size()));
             enemy.battleSpecialAbility(spellPower,enemy.defend());
+            if(!enemy.alive()){
+                addExperience(enemy.experienceValue());
+                enemy.onDeath();
+                enemiesInRange.remove(enemy);
+            }
             hits= hits + 1;
         }
+        if (hits>0){
+            currentMana = currentMana - manaCost;
+        }
 
 
 
         }
+    public int getCurrmana() {
+        return currentMana;
+    }
 
     }

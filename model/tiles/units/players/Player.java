@@ -86,7 +86,9 @@ public abstract class  Player extends Unit {
 
     @Override
     public void onDeath() {
-        //TODO: Implement onDeath
+        this.setTile('X');
+       this.messageCallback.send("GAME OVER");
+
     }
 
     public abstract void newTick();
@@ -108,4 +110,7 @@ public abstract class  Player extends Unit {
     public void setInputReader(InputReader inputReader) {
         this.inputReader = inputReader;
     }
+
+
+
 }

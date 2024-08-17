@@ -49,12 +49,21 @@ public class Warrior extends Player{
                remainingCoolDown = abilityCoolDown;
                health.updateCurrentHealthOnCast(defense);
                    e.battleSpecialAbility((int)(health.getCapacity()*0.1),e.defend());
+                   if(!e.alive()){
+                   addExperience(e.experienceValue());
+                   e.onDeath();
+
+               }
                    return;
            }
 
 
         }
 
+    }
+
+    public int getRemainingCoolDown() {
+        return remainingCoolDown;
     }
 
 
