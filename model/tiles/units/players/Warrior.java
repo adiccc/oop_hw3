@@ -45,24 +45,24 @@ public class Warrior extends Player{
 
     @Override
     public void specialAbility(List<Enemy> enemies) {
-        if (remainingCoolDown == 0) {
+        if (remainingCoolDown <= 0) {
+            int healthGain=-health.getCurrent()+health.updateCurrentHealthOnCast(defense);
+            messageCallback.send(getName()+" used "+ABILITY_NAME+", healing for "+healthGain);
             for (Enemy e : enemies) {
                 if (e.getPosition().range(this.position) <= 3) {
                     remainingCoolDown = abilityCoolDown;
-                    health.updateCurrentHealthOnCast(defense);
-                    e.battleSpecialAbility((int) (health.getCapacity() * 0.1), e.defend());
+                    int damageTaken=e.battleSpecialAbility((int) (health.getCapacity() * 0.1), e.defend());
+                    messageCallback.send(getName()+" dealt "+damageTaken+" damage to "+e.getName());
                     if (!e.alive()) {
                         addExperience(e.experienceValue());
                         e.onDeath();
-
                     }
                     return;
                 }
-
-
             }
         }
-
+        else{
+            messageCallback.send(getName()+" need to coolDown before using "+ABILITY_NAME);}
     }
 
     public int getRemainingCoolDown() {

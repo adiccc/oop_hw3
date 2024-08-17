@@ -108,7 +108,7 @@ public abstract class Unit extends Tile {
     }
 
 
-    public void battleSpecialAbility(int attack, int defense) {
-        this.health.takeDamage(attack - defense);
+    public int battleSpecialAbility(int attack, int defense) {
+        return this.health.takeDamage(attack - defense);
     }
 }
