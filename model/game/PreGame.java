@@ -18,7 +18,8 @@ public class PreGame {
         this.messageCallback = messageCallback;
         this.inputReader = inputReader;
         instruction();
-        this.playerId=choosePlayer();
+        viewPlayersOption();
+        this.playerId=choosePlayer()-1;
     }
 
     public int getPlayerId(){
@@ -27,7 +28,6 @@ public class PreGame {
 
     private int choosePlayer() {
         try{
-            viewPlayersOption();
             char charPlayerChoise=inputReader.readPlayerChoise(TileFactory.playerTypes.size());
             return Integer.parseInt(String.valueOf(charPlayerChoise));
         } catch(Exception e){
