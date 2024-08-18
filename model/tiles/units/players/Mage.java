@@ -22,6 +22,7 @@ public class Mage extends Player   {
         super(name, hitPoints, attack, defense);
         this.manaPool = manaPool;
         this.currentMana = manaPool/4;
+        this.manaCost = manaCost;
         this.spellPower = spellPower;
         this.hitsCount = hitsCount;
         this.abilityRange = abilityRange;
@@ -48,8 +49,13 @@ public class Mage extends Player   {
     public void specialAbility(List<Enemy> enemies) {
         int hits = 0;
         List<Enemy> enemiesInRange = enemies.stream()
-                .filter(e -> e.getPosition().range(this.position) <=  this.spellPower)
+                .filter(e -> e.getPosition().range(this.position) <=  this.abilityRange)
                 .toList();
+        if (currentMana<manaCost){
+            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but your current mana is: "+currentMana + "which is less than the mana cost");
+            return;
+        }
+
         while (hits<hitsCount&& !enemiesInRange.isEmpty()) {
             Random random = new Random();
             Enemy enemy = enemiesInRange.get(random.nextInt(enemiesInRange.size()));

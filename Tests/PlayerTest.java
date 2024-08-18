@@ -79,9 +79,9 @@ public class PlayerTest {
         Enemy enemy3=tileFactory.produceEnemy('s');
         Enemy enemy4=tileFactory.produceEnemy('s');
         List<Enemy> enemies=new ArrayList<>();
-        enemy1.initialize(new Position(14,0),new FixedGenerator(),()-> {},null);
+        enemy1.initialize(new Position(1,0),new FixedGenerator(),()-> {},null);
         enemy2.initialize(new Position(3,2),new FixedGenerator(),()-> {},null);
-        enemy3.initialize(new Position(16,0),new FixedGenerator(),()-> {},null);
+        enemy3.initialize(new Position(2,0),new FixedGenerator(),()-> {},null);
         enemy4.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
         mage.initialize(new Position(0,1),new FixedGenerator(),null,null);
         enemies.add(enemy1);enemies.add(enemy2);enemies.add(enemy3);enemies.add(enemy4);
@@ -107,7 +107,7 @@ public class PlayerTest {
         Player mage=tileFactory.producePlayer(3,new InputReaderScanncer());
         Enemy enemy1=tileFactory.produceEnemy('s');
         List<Enemy> enemies=new ArrayList<>();
-        enemy1.initialize(new Position(14,0),new FixedGenerator(),()-> {},null);
+        enemy1.initialize(new Position(3,0),new FixedGenerator(),()-> {},null);
         mage.initialize(new Position(0,1),new FixedGenerator(),null,null);
         enemies.add(enemy1);
         mage.specialAbility(enemies);

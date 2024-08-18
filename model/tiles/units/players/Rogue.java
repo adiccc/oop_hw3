@@ -5,13 +5,12 @@ import model.tiles.units.enemies.Enemy;
 import java.util.List;
 
 public class Rogue extends Player {
-    private int energy;
     private int cost;
     private int currentEnergy;
+    private final String ABILITY_NAME="Fan Of Knives";
 
     public Rogue(String name, int hitPoints, int attack, int defense, int cost) {
         super(name, hitPoints, attack, defense);
-        this.energy = 100;
         this.cost = cost;
         this.currentEnergy = 100;
 
@@ -35,22 +34,26 @@ public class Rogue extends Player {
 
     public void specialAbility(List<Enemy> enemies) {
         if(currentEnergy <  cost) {
-            //your massage here;
+            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is not enough energy"  );
         }
         else{
-
-            for (Enemy e : enemies){
-                if(e.getPosition().range(this.position)<=2){
-                    currentEnergy = currentEnergy - cost;
+            List<Enemy> enemiesInRange = enemies.stream()
+                    .filter(e -> e.getPosition().range(this.position) <2)
+                    .toList();
+            if(enemiesInRange.isEmpty()) {
+                messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is no any enemy in range"  );
+            }
+            else{
+                currentEnergy = currentEnergy - cost;
+                for (Enemy e : enemiesInRange){
                     this.battleSpecialAbility(Integer.parseInt(this.getAttack()), e.defend());
                     if(!e.alive()){
                         addExperience(e.experienceValue());
                         e.onDeath();
                     }
                 }
-
-
             }
+
         }
 
 
