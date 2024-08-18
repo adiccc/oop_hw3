@@ -17,8 +17,8 @@ public class TrapTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(1,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('Q');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
-        player.initialize(new Position(1,0),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,(x)->{});
+        player.initialize(new Position(1,0),new FixedGenerator(),null,(x)->{});
         enemy.turn(player);
         Assert.assertEquals("trap should have been visiable after 1 game tick ", "Q",enemy.toString());
         enemy.turn(player);
@@ -37,12 +37,12 @@ public class TrapTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(1,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('Q');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
-        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,(x)->{});
+        player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         enemy.turn(player);
-        Assert.assertEquals("enemy 'Q' didnt attack the player in his range", "240/250",enemy.getHealth());
+        Assert.assertEquals("enemy 'Q' didnt attack the player in his range", "378/400",player.getHealth());
         player.setPosition(new Position(8,8));
         enemy.turn(player);
-        Assert.assertEquals("enemy 'Q' attack the player out of his range", "240/250",enemy.getHealth());
+        Assert.assertEquals("enemy 'Q' attack the player out of his range", "378/400",player.getHealth());
     }
 }

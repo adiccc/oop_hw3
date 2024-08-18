@@ -26,7 +26,7 @@ public class PlayerTest {
     public void onTick(){
         TileFactory tileFactory=new TileFactory(); // generate the tile factory for the game
         Player p=tileFactory.producePlayer(1,new InputReaderFile("./Tests/TestFiles/playerOnTick.txt")); // generate player
-        p.initialize(new Position(0,0),new FixedGenerator(),null,null);
+        p.initialize(new Position(0,0),new FixedGenerator(),null,(x)->{});
         Assert.assertEquals("the user input doesnt match the requested player move", InputProvider.Up.GetKey(),p.onTick().GetKey());
     }
 
@@ -35,8 +35,8 @@ public class PlayerTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(1,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('M');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
-        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,(x)->{});
+        player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         enemy.battle(player);
         Assert.assertTrue("player '2' died after a battel with enemy 'M' and he shouldn't have", player.alive());
         Assert.assertEquals("player should take 27 heath demage and didnt ","272/300",player.getHealth());
@@ -47,8 +47,8 @@ public class PlayerTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(2,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('B');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
-        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,(x)->{});
+        player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         enemy.battle(player);
         Assert.assertTrue("player '2' died after a battel with enemy 'B' and he shouldn't have", player.alive());
         Assert.assertEquals("player shouldnt take damage ","400/400",player.getHealth());
@@ -59,8 +59,8 @@ public class PlayerTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(6,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('s');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
-        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
+        player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         player.visit(enemy);
         player.visit(enemy);
         player.visit(enemy);
@@ -79,11 +79,11 @@ public class PlayerTest {
         Enemy enemy3=tileFactory.produceEnemy('s');
         Enemy enemy4=tileFactory.produceEnemy('s');
         List<Enemy> enemies=new ArrayList<>();
-        enemy1.initialize(new Position(1,0),new FixedGenerator(),()-> {},null);
-        enemy2.initialize(new Position(3,2),new FixedGenerator(),()-> {},null);
-        enemy3.initialize(new Position(2,0),new FixedGenerator(),()-> {},null);
-        enemy4.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
-        mage.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy1.initialize(new Position(1,0),new FixedGenerator(),()-> {},(x)->{});
+        enemy2.initialize(new Position(3,2),new FixedGenerator(),()-> {},(x)->{});
+        enemy3.initialize(new Position(2,0),new FixedGenerator(),()-> {},(x)->{});
+        enemy4.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
+        mage.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         enemies.add(enemy1);enemies.add(enemy2);enemies.add(enemy3);enemies.add(enemy4);
         mage.specialAbility(enemies);
         Mage m =(Mage) (mage);
@@ -107,8 +107,8 @@ public class PlayerTest {
         Player mage=tileFactory.producePlayer(3,new InputReaderScanncer());
         Enemy enemy1=tileFactory.produceEnemy('s');
         List<Enemy> enemies=new ArrayList<>();
-        enemy1.initialize(new Position(3,0),new FixedGenerator(),()-> {},null);
-        mage.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy1.initialize(new Position(3,0),new FixedGenerator(),()-> {},(x)->{});
+        mage.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         enemies.add(enemy1);
         mage.specialAbility(enemies);
         Mage m =(Mage) (mage);
@@ -123,8 +123,8 @@ public class PlayerTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(1,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('s');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
-        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
+        player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         List<Enemy> enemies=new ArrayList<>();
         enemies.add(enemy);
         player.specialAbility(enemies);
@@ -137,8 +137,8 @@ public class PlayerTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(5,new InputReaderScanncer()); //150
         Enemy enemy=tileFactory.produceEnemy('s'); // 80
-        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
-        player.initialize(new Position(0,1),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
+        player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         List<Enemy> enemies=new ArrayList<>();
         enemies.add(enemy);
         player.specialAbility(enemies);
@@ -153,8 +153,8 @@ public class PlayerTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(7,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('s'); // 80
-        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},null);
-        player.initialize(new Position(0,4),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
+        player.initialize(new Position(0,4),new FixedGenerator(),null,(x)->{});
         List<Enemy> enemies=new ArrayList<>();
         enemies.add(enemy);
         player.specialAbility(enemies);
