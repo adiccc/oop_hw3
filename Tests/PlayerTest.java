@@ -149,7 +149,7 @@ public class PlayerTest {
         player.specialAbility(enemies);
         Rogue w = (Rogue) player;
         Assert.assertEquals("Arye Starck should have energy : ",80, w.getCurrentEnergy());
-        Assert.assertEquals("Lannister Knight should have","41/80" ,enemy.getHealth());
+        Assert.assertEquals(" Solider should have","41/80" ,enemy.getHealth());
     }
 
 
@@ -157,7 +157,7 @@ public class PlayerTest {
     public void hunterSpecialAbility(){
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(6,new InputReaderScanncer());
-        Enemy enemy=tileFactory.produceEnemy('s'); // 80
+        Enemy enemy=tileFactory.produceEnemy('k'); // 80
         enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
         player.initialize(new Position(0,4),new FixedGenerator(),null,(x)->{});
         List<Enemy> enemies=new ArrayList<>();
@@ -165,7 +165,7 @@ public class PlayerTest {
         player.specialAbility(enemies);
         Hunter hunter = (Hunter) player;
         Assert.assertEquals("hunter should have 9 current energy ",9,hunter.getCurrentArrow());
-     //   Assert.assertTrue("enemy should have less than health:",healthToInteger(enemy.getHealth())<80);
+        Assert.assertEquals("Lannister Knight should have","174/200" ,enemy.getHealth());
 
     }
     private int healthToInteger(String health){

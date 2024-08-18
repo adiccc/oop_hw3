@@ -49,7 +49,7 @@ public class Rogue extends Player {
                 for (Enemy e : enemiesInRange){
                     int defense = e.defend();
                     messageCallback.send(e.getName() + "  rolled " + defense + " points ");
-                    int damage = this.battleSpecialAbility(Integer.parseInt(this.getAttack()), defense);
+                    int damage = e.battleSpecialAbility(Integer.parseInt(this.getAttack()), defense);
                     messageCallback.send(this.getName() + " hit " + e.getName() + " for " + damage + " ability damage ");
                     if(!e.alive()){
                         addExperience(e.experienceValue());

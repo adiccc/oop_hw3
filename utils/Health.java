@@ -10,6 +10,7 @@ public class Health {
     }
 
     public int takeDamage(int damageTaken) {
+
         damageTaken = Math.max(0, damageTaken);
         damageTaken = Math.min(current, damageTaken);
         current -= damageTaken;
