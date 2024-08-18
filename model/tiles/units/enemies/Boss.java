@@ -37,15 +37,12 @@ public class Boss extends Enemy{
                 return chaisePlayer(player);
             }
         }
-
             combatTickes = 0;
             int direction = generator.generate(5);
             if (direction == 4) {
                 direction++;
             }
             return InputProvider.values()[direction];
-
-
     }
 
     private InputProvider chaisePlayer(Player player){
@@ -67,11 +64,6 @@ public class Boss extends Enemy{
                 return InputProvider.Down;
             }
         }
-
-    }
-
-    @Override
-    public void newTick() {
 
     }
 

@@ -15,7 +15,6 @@ public class RandomGenerator implements Generator {
 
     @Override
     public int generate(int value) {
-
         return random.nextInt(value);
     }
 }

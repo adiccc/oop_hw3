@@ -71,8 +71,6 @@ public class Hunter extends Player{
                     enemy.onDeath();
                 }
             });
-
-
         }
     }
 
