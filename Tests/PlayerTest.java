@@ -91,7 +91,7 @@ public class PlayerTest {
         enemies.add(enemy1);enemies.add(enemy2);enemies.add(enemy3);enemies.add(enemy4);
         mage.specialAbility(enemies);
         Mage m =(Mage) (mage);
-        Assert.assertEquals("mage should have 150 currmana ",150,(m.getCurrmana()));
+        Assert.assertEquals("mage should have 45 currmana ",45,(m.getCurrmana()));
         Assert.assertTrue("enemies sould be hit", hitedEnemies(enemies));
     }
 
@@ -108,16 +108,16 @@ public class PlayerTest {
     @Test
     public void mageSpecialAbility2(){
         TileFactory tileFactory=new TileFactory();
-        Player mage=tileFactory.producePlayer(2,new InputReaderScanncer());
+        Player mage=tileFactory.producePlayer(3,new InputReaderScanncer());
         Enemy enemy1=tileFactory.produceEnemy('s');
         List<Enemy> enemies=new ArrayList<>();
         enemy1.initialize(new Position(3,0),new FixedGenerator(),()-> {},(x)->{});
         mage.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         enemies.add(enemy1);
         mage.specialAbility(enemies);
-        Mage m =(Mage) (mage);
-        Assert.assertEquals("mage should have 150 currmana ",150,(m.getCurrmana()));
-        Assert.assertFalse("enemy should died after a battle with special ability with mage", enemy1.alive());
+        Mage m =(Mage)(mage);
+        Assert.assertEquals("mage should have 45 currmana ",17,(m.getCurrmana()));
+       Assert.assertEquals("solider should have","23/80" ,enemy1.getHealth());
     }
 
 
@@ -126,31 +126,32 @@ public class PlayerTest {
     public void warriorSpecialAbility(){
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(0,new InputReaderScanncer());
-        Enemy enemy=tileFactory.produceEnemy('s');
+        Enemy enemy=tileFactory.produceEnemy('k');
         enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
         player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         List<Enemy> enemies=new ArrayList<>();
         enemies.add(enemy);
         player.specialAbility(enemies);
         Warrior w = (Warrior) player;
-        Assert.assertEquals("Warrior should have 5 remainig cooldown",5,w.getRemainingCoolDown());
-        //Assert.assertEquals("","50/80",enemy.getHealth());
+        Assert.assertEquals("Warrior should have 3 remainig cooldown",3,w.getRemainingCoolDown());
+        Assert.assertEquals("Lannister Knight should have","174/200" ,enemy.getHealth());
     }
+
     @Test
-    public void rogueSpecialAbility(){
+    public void roughSpecialAbility(){
         TileFactory tileFactory=new TileFactory();
-        Player player=tileFactory.producePlayer(4,new InputReaderScanncer()); //150
-        Enemy enemy=tileFactory.produceEnemy('s'); // 80
+        Player player=tileFactory.producePlayer(4,new InputReaderScanncer());
+        Enemy enemy=tileFactory.produceEnemy('s');
         enemy.initialize(new Position(0,0),new FixedGenerator(),()-> {},(x)->{});
         player.initialize(new Position(0,1),new FixedGenerator(),null,(x)->{});
         List<Enemy> enemies=new ArrayList<>();
         enemies.add(enemy);
         player.specialAbility(enemies);
-        Rogue r = (Rogue) player;
-        Assert.assertEquals("Rogue should have 80 remainig cooldown",80,r.getCurrentEnergy());
-       // Assert.assertEquals("enemy should have 40/80 health: ","40/80",enemy.getHealth());
-
+        Rogue w = (Rogue) player;
+        Assert.assertEquals("Arye Starck should have energy : ",80, w.getCurrentEnergy());
+        Assert.assertEquals("Lannister Knight should have","41/80" ,enemy.getHealth());
     }
+
 
     @Test
     public void hunterSpecialAbility(){

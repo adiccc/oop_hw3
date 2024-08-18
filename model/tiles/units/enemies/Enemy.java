@@ -9,6 +9,8 @@ import model.tiles.units.players.Player;
 import utils.Position;
 import utils.generators.Generator;
 
+import java.util.List;
+
 public abstract class Enemy extends Unit implements HeroicUnit {
     protected int experienceValue;
 
@@ -44,7 +46,9 @@ public abstract class Enemy extends Unit implements HeroicUnit {
             p.onDeath();
         }
     }
+    public <T> void casAbility(List<T> units){
 
+    }
     public abstract InputProvider turn(Player player);
 
     protected abstract boolean isInRange(Player player);

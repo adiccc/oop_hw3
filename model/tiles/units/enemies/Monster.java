@@ -47,8 +47,5 @@ public class Monster extends Enemy{
 
     }
 
-    @Override
-    public <T> void casAbility(List<T> units) {
 
-    }
 }

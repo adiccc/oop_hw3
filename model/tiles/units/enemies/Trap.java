@@ -49,8 +49,5 @@ public class Trap extends Enemy {
 
     }
 
-    @Override
-    public <T> void casAbility(List<T> units) {
 
-    }
 }
