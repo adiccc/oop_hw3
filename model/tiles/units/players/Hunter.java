@@ -10,6 +10,7 @@ public class Hunter extends Player{
     private int range;
     private int arrowsCount;
     private int ticksCount;
+    private final String ABILITY_NAME="Shoot";
 
 
     public Hunter (String name, int hitPoints, int attack, int defense, int range) {
@@ -47,10 +48,10 @@ public class Hunter extends Player{
     @Override
     public void specialAbility(List<Enemy> enemies) {
         List<Enemy> enemiesInRange = enemies.stream()
-                .filter(e -> e.getPosition().range(this.position) <=6)
+                .filter(e -> e.getPosition().range(this.position) <=range)
                 .toList();
         if(arrowsCount==0 || enemiesInRange.isEmpty()) {
-            // write error massage;
+            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but your current arrows is: 0 or you dont have any enemy in range:"+range );
         }
         else if(arrowsCount>0){
             arrowsCount = arrowsCount -1;
