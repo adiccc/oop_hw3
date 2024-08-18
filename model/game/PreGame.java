@@ -45,7 +45,7 @@ public class PreGame {
     }
 
     // print the instructions and game control
-    public void instruction(){
+    private void instruction(){
         messageCallback.send("*!*!*!*!*!*!*!*!*! D&D-Roguelike !*!*!*!*!*!*!*!*!*");
         messageCallback.send("*** Game instructions:\n");
         messageCallback.send("* Game Controls:\n");

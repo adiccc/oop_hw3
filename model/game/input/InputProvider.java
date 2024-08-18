@@ -18,7 +18,6 @@ public enum InputProvider {
     public String GetKey() {
         return this.key;
     }
-    
     public static String getRegex() {
         StringBuilder regex = new StringBuilder();
         for (InputProvider inp : InputProvider.values()) {
