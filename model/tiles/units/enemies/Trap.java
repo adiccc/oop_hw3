@@ -12,6 +12,7 @@ public class Trap extends Enemy {
     private int tickCount = 0;
     private final char VISIABLE_TILE;
     private char UNVISIABLE_TILE='.';
+    private int RANGE=2;
 
     public Trap(char tile, String name, int hitPoints, int attack, int defense, int experinceValue, int visibiltyTime, int invisibiltyTime) {
         super(tile,name,hitPoints,attack,defense,experinceValue);
@@ -21,7 +22,7 @@ public class Trap extends Enemy {
     }
 
     protected boolean isInRange(Player player){
-        return 2>=this.position.range(player.getPosition());
+        return this.position.isInRange(player.getPosition(),RANGE);
     }
 
     @Override
@@ -45,9 +46,7 @@ public class Trap extends Enemy {
     }
 
     @Override
-    public void newTick() {
+    public <T> void casAbility(List<T> units) {
 
     }
-
-
 }

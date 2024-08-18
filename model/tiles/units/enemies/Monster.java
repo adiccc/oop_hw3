@@ -14,7 +14,7 @@ public class Monster extends Enemy{
     }
 
     protected boolean isInRange(Player player){
-        return visionRange>=this.position.range(player.getPosition());
+        return this.position.isInRange(player.getPosition(),visionRange);
     }
 
     @Override
@@ -43,9 +43,7 @@ public class Monster extends Enemy{
     }
 
     @Override
-    public void newTick() {
+    public <T> void casAbility(List<T> units) {
 
     }
-
-
 }

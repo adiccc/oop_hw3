@@ -50,7 +50,6 @@ public abstract class Unit extends Tile {
     public boolean alive(){
         return health.getCurrent() > 0;
     }
-    public abstract void newTick();
 
 
     public void battle(Unit enemy) {
@@ -68,18 +67,14 @@ public abstract class Unit extends Tile {
             messageCallback.send(getName()+ "did not dealt damage to "+enemy.getName());
     }
 
-    public void interact(Tile t){
-        t.accept(this);
-    }
-
     public void visit(Empty e){
         this.swapPosition(e);
-        this.newTick();
     }
 
     public void visit(Wall w){
         // Do nothing
     }
+
 
     public abstract void visit(Player p);
     public abstract void visit(Enemy e);

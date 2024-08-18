@@ -6,8 +6,6 @@ import model.tiles.Wall;
 import model.tiles.units.HeroicUnit;
 import model.tiles.units.Unit;
 import model.tiles.units.players.Player;
-import utils.Position;
-import utils.generators.Generator;
 
 import java.util.List;
 
@@ -32,14 +30,6 @@ public abstract class Enemy extends Unit implements HeroicUnit {
         // Do nothing
     }
 
-    public void visit(Wall w){
-        // Do nothing
-    }
-
-    public void visit(Empty empty){
-        swapPosition(empty);
-    }
-
     public void visit(Player p){
         battle(p);
         if (!p.alive()){
@@ -52,6 +42,4 @@ public abstract class Enemy extends Unit implements HeroicUnit {
     public abstract InputProvider turn(Player player);
 
     protected abstract boolean isInRange(Player player);
-
-
 }

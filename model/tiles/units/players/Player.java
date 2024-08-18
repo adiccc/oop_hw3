@@ -72,20 +72,19 @@ public abstract class  Player extends Unit implements HeroicUnit {
 
     public void visit(Enemy e){
         battle(e);
-        if(!e.alive()){
-            addExperience(e.experienceValue());
-            this.swapPosition(e);
-            e.onDeath();
-            messageCallback.send(e.getName()+" died. "+getName()+" gained "+e.experienceValue()+" experience");
-        }
+        if(!e.alive())
+            killEnemy(e);
     }
 
-    public void visit(Wall w){
-        // Do nothing
+    public void visit(Player p){
+        //Do nothing
     }
 
-    public void visit(Empty empty){
-        swapPosition(empty);
+    private void killEnemy(Enemy e){
+        addExperience(e.experienceValue());
+        this.swapPosition(e);
+        e.onDeath();
+        messageCallback.send(e.getName()+" died. "+getName()+" gained "+e.experienceValue()+" experience");
     }
 
     @Override
@@ -93,7 +92,6 @@ public abstract class  Player extends Unit implements HeroicUnit {
         this.setTile('X');
     }
 
-    public abstract void newTick();
     public abstract void specialAbility(List<Enemy> enemies);
 
     public void setPosition(Position position) {
@@ -122,4 +120,8 @@ public abstract class  Player extends Unit implements HeroicUnit {
     public void setInputReader(InputReader inputReader) {
         this.inputReader = inputReader;
     }
+
+    public abstract void newTick();
+
+
 }

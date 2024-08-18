@@ -42,7 +42,6 @@ public class Position implements Comparable<Position> {
        return false;
     }
 
-    //TODO delete this function
     @Override
     public String toString(){
         return "(" + x + ", " + y + ")";
