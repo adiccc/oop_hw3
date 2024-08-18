@@ -90,8 +90,6 @@ public abstract class  Player extends Unit implements HeroicUnit {
     @Override
     public void onDeath() {
         this.setTile('X');
-       this.messageCallback.send("GAME OVER");
-
     }
 
     public abstract void newTick();
