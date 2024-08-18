@@ -18,8 +18,8 @@ public class MonaterTest {
         TileFactory tileFactory=new TileFactory();
         Player player=tileFactory.producePlayer(1,new InputReaderScanncer());
         Enemy enemy=tileFactory.produceEnemy('s');
-        enemy.initialize(new Position(0,0),new FixedGenerator(),null,null);
-        player.initialize(new Position(1,0),new FixedGenerator(),null,null);
+        enemy.initialize(new Position(0,0),new FixedGenerator(),null,(x)->{});
+        player.initialize(new Position(1,0),new FixedGenerator(),null,(x)->{});
         Assert.assertEquals("monster should have chase the player in its range ", InputProvider.Right,enemy.turn(player));
         player.setPosition(new Position(8,5));
         Assert.assertEquals("monster shouldn't have chase the player, its out of his range ", InputProvider.Left,enemy.turn(player));

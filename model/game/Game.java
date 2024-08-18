@@ -13,7 +13,7 @@ import java.util.List;
 public class Game {
     private MessageCallback messageCallback;
 
-    public Game(LevelInitializer initializer, MessageCallback messageCallback ){
+    public Game(LevelInitializer initializer, MessageCallback messageCallback){
         this.messageCallback = messageCallback;
         initAllLevels("C:\\Users\\edens\\Dnaguen\\oop_hw3\\Levels",initializer);
     }
@@ -32,4 +32,5 @@ public class Game {
             Level l=new Level(initializer.buildBord(),messageCallback);
         }
     }
+
 }

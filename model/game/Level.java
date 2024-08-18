@@ -27,22 +27,26 @@ public class Level {
         boolean isPlayerTurn = true;
         while (player.alive() && !enemies.isEmpty()) {
             // player's turn
-            if (isPlayerTurn){
+            if (isPlayerTurn) {
                 messageCallback.send(board.toString());
                 messageCallback.send(player.description());
                 InputProvider playerMove = player.onTick();
                 board.moveTile(player, playerMove);
             }
 
-                // enemies turn
+            // enemies turn
             else {
                 if (player.alive()) {
                     for (Enemy e : enemies)
-                        board.moveTile(e,e.turn(player));
+                        board.moveTile(e, e.turn(player));
                 }
             }
             isPlayerTurn = !isPlayerTurn;
-            this.enemies=board.getEnemies();
+            this.enemies = board.getEnemies();
+        }
+        if (!player.alive()){
+            messageCallback.send(board.toString());
+            messageCallback.send("GAME OVER");
         }
     }
 }

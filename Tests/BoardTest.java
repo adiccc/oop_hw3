@@ -23,9 +23,9 @@ public class BoardTest {
         Enemy e=tileFactory.produceEnemy('Q');
         Tile empty=tileFactory.produceEmpty(new Position(0,0));
         Tile wall=tileFactory.produceWall(new Position(2,0));
-        e.initialize(new Position(1,0),new FixedGenerator(),null,null);
+        e.initialize(new Position(1,0),new FixedGenerator(),null,(x)->{});
         Player p= tileFactory.producePlayer(1,new InputReaderScanncer());
-        p.initialize(new Position(1,1),new FixedGenerator(),null,null);
+        p.initialize(new Position(1,1),new FixedGenerator(),null,(x)->{});
         List<Tile> tiles=new ArrayList<>();
         tiles.add(empty);
         tiles.add(wall);
@@ -46,9 +46,9 @@ public class BoardTest {
         Board board = new Board();
         TileFactory tileFactory=new TileFactory();
         Enemy e=tileFactory.produceEnemy('B');
-        e.initialize(new Position(1,0),new FixedGenerator(),()-> board.removeEnemy(e,tileFactory.produceEmpty(new Position(-1,-1))),null);
+        e.initialize(new Position(1,0),new FixedGenerator(),()-> board.removeEnemy(e,tileFactory.produceEmpty(new Position(-1,-1))),(x)->{});
         Player p= tileFactory.producePlayer(1,new InputReaderScanncer());
-        p.initialize(new Position(1,1),new FixedGenerator(),null,null);
+        p.initialize(new Position(1,1),new FixedGenerator(),null,(x)->{});
         List<Tile> tiles=new ArrayList<>();
         tiles.add(e);
         tiles.add(p);

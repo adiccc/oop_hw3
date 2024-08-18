@@ -1,20 +1,15 @@
 package control.initializers;
 
-import model.game.Board;
 import model.game.input.InputReader;
 import model.tiles.Empty;
 import model.tiles.Tile;
 import model.tiles.Wall;
-import model.tiles.units.Unit;
 import model.tiles.units.enemies.Boss;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.enemies.Monster;
 import model.tiles.units.enemies.Trap;
 import model.tiles.units.players.*;
 import utils.Position;
-import utils.callbacks.DeathCallback;
-import utils.callbacks.MessageCallback;
-import utils.generators.Generator;
 
 import java.util.Arrays;
 import java.util.HashMap;
