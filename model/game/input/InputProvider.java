@@ -8,7 +8,7 @@ public enum InputProvider {
     CastAbility("e"),
     Wait("q");
 
-    private String key;
+    private final String key;
 
      InputProvider(String key) {
         this.key = key;
