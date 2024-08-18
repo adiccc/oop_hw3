@@ -8,9 +8,10 @@ import java.util.Random;
 
 public class Hunter extends Player{
     private int range;
-    private int arrowsCount;
+    private int arrowsCount; // courent amount of arrows
     private int ticksCount;
     private final String ABILITY_NAME="Shoot";
+
 
 
     public Hunter (String name, int hitPoints, int attack, int defense, int range) {
@@ -54,13 +55,17 @@ public class Hunter extends Player{
             messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but your current arrows is: 0 or you dont have any enemy in range:"+range );
         }
         else if(arrowsCount>0){
+            messageCallback.send(getName()+ " cast " + ABILITY_NAME);
             arrowsCount = arrowsCount -1;
             Optional<Enemy> closestEnemy = enemiesInRange.stream().min((e1, e2) ->
                     Integer.compare((int) e1.getPosition().range(this.position), (int) e2.getPosition().range(this.position)));
 
             closestEnemy.ifPresent(enemy -> {
                 // Call a method on the enemy object
-                enemy.battleSpecialAbility(Integer.parseInt(this.getAttack()),enemy.defend());
+                int defense = enemy.defend();
+                messageCallback.send(enemy.getName() + "  rolled " + defense + " points ");
+                int damage = enemy.battleSpecialAbility(Integer.parseInt(this.getAttack()),defense);
+                messageCallback.send(this.getName() + " hit " + enemy.getName() + " for " + damage + " ability damage ");
                 if(!enemy.alive()) {
                     addExperience(enemy.experienceValue());
                     enemy.onDeath();
@@ -79,6 +84,13 @@ public class Hunter extends Player{
     public int getCurrentArrow() {
         return this.arrowsCount;
     }
+
+    @Override
+    public String description() {
+        return super.description() +
+                "\t\tArrows: " + arrowsCount;
+    }
+
 
     @Override
     public <T> void casAbility(List<T> units) {

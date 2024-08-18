@@ -55,11 +55,14 @@ public class Mage extends Player   {
             messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but your current mana is: "+currentMana + "which is less than the mana cost");
             return;
         }
-
         while (hits<hitsCount&& !enemiesInRange.isEmpty()) {
+            messageCallback.send(getName()+ " cast " + ABILITY_NAME);
             Random random = new Random();
             Enemy enemy = enemiesInRange.get(random.nextInt(enemiesInRange.size()));
-            enemy.battleSpecialAbility(spellPower,enemy.defend());
+            int defense = enemy.defend();
+            messageCallback.send(enemy.getName() + "  rolled " + defense + " points ");
+            int damge = enemy.battleSpecialAbility(spellPower,defense);
+            messageCallback.send(this.getName() + " hit " + enemy.getName() + " for " + damge + " ability damage ");
             if(!enemy.alive()){
                 addExperience(enemy.experienceValue());
                 enemy.onDeath();
@@ -73,6 +76,12 @@ public class Mage extends Player   {
     }
     public int getCurrmana() {
         return currentMana;
+    }
+    @Override
+    public String description() {
+        return super.description() +
+                "\t\tMana: " + currentMana + "/" + manaPool+
+                "\t\tSpell Power: " + spellPower;
     }
 
     @Override

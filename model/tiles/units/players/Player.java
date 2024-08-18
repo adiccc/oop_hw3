@@ -1,5 +1,6 @@
 package model.tiles.units.players;
 
+import model.game.Level;
 import model.game.input.InputProvider;
 import model.game.input.InputReader;
 import model.tiles.Empty;
@@ -108,6 +109,16 @@ public abstract class  Player extends Unit implements HeroicUnit {
 
     public int getExperience() {
         return experience;
+    }
+
+    public String getExperienceForPrint(){
+        return String.valueOf(getExperience());
+    }
+
+    public String description() {
+        return super.description() +
+                "\t\tLevel: " + level +
+                "\t\tExperience: " + experience + "/" + levelRequirement();
     }
 
     public void setInputReader(InputReader inputReader) {

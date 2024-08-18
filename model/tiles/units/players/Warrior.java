@@ -29,7 +29,8 @@ public class Warrior extends Player{
     // the Warrior describe
     @Override
     public String description() {
-        return super.description() + "\t\tCooldown: " + remainingCoolDown + "/" + abilityCoolDown;
+        return super.description() +
+                "\t\tCooldown: " + remainingCoolDown + "/" + abilityCoolDown;
     }
 
 

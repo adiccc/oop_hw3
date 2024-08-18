@@ -91,7 +91,7 @@ public abstract class Unit extends Tile {
 
     // return a string that describe the unit
     public String description() {
-        return String.format("%s\t\tHeath: %s\t\tAttack: %s\t\tDefense: %s", getName(), getHealth().toString(), getAttack(), getDefence());
+        return String.format("%s\t\tHealth: %s\t\tAttack: %s\t\tDefense: %s", getName(), getHealth().toString(), getAttack(), getDefence());
     }
 
     public String getName() {

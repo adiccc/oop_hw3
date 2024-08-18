@@ -38,15 +38,19 @@ public class Rogue extends Player {
         }
         else{
             List<Enemy> enemiesInRange = enemies.stream()
-                    .filter(e -> e.getPosition().range(this.position) <2)
+                    .filter(e -> e.getPosition().range(this.position) <=2)
                     .toList();
             if(enemiesInRange.isEmpty()) {
                 messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is no any enemy in range"  );
             }
             else{
+                messageCallback.send(getName()+ " cast " + ABILITY_NAME);
                 currentEnergy = currentEnergy - cost;
                 for (Enemy e : enemiesInRange){
-                    this.battleSpecialAbility(Integer.parseInt(this.getAttack()), e.defend());
+                    int defense = e.defend();
+                    messageCallback.send(e.getName() + "  rolled " + defense + " points ");
+                    int damage = this.battleSpecialAbility(Integer.parseInt(this.getAttack()), defense);
+                    messageCallback.send(this.getName() + " hit " + e.getName() + " for " + damage + " ability damage ");
                     if(!e.alive()){
                         addExperience(e.experienceValue());
                         e.onDeath();
@@ -57,6 +61,11 @@ public class Rogue extends Player {
         }
 
 
+    }
+
+    public String description() {
+        return super.description() +
+                "\t\tEnergy: " + getCurrentEnergy() + "/100";
     }
 
     public int getCurrentEnergy() {
