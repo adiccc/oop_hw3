@@ -1,11 +1,12 @@
 package model.tiles.units.enemies;
 import model.game.input.InputProvider;
+import model.tiles.units.HeroicUnit;
 import model.tiles.units.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Boss extends Enemy{
+public class Boss extends Enemy implements HeroicUnit {
     private int visionRange;
     private int abilityFrequency;
     private int combatTickes;
@@ -67,7 +68,6 @@ public class Boss extends Enemy{
 
     }
 
-    @Override
     public <T> void casAbility(List<T> units) {
         Player player = (Player) units.get(0);
         this.battleSpecialAbility(Integer.parseInt(this.getAttack()),player.defend());

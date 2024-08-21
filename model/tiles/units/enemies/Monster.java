@@ -42,8 +42,4 @@ public class Monster extends Enemy{
             return InputProvider.Up;
     }
 
-    @Override
-    public <T> void casAbility(List<T> units) {
-
-    }
 }

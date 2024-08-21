@@ -44,9 +44,4 @@ public class Trap extends Enemy {
         else
             tickCount++;
     }
-
-    @Override
-    public <T> void casAbility(List<T> units) {
-
-    }
 }

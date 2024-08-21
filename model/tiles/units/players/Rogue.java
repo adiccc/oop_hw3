@@ -72,8 +72,4 @@ public class Rogue extends Player {
         return currentEnergy;
     }
 
-    @Override
-    public <T> void casAbility(List<T> units) {
-        specialAbility((List<Enemy>) units);
-    }
 }

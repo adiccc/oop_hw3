@@ -123,5 +123,8 @@ public abstract class  Player extends Unit implements HeroicUnit {
 
     public abstract void newTick();
 
+    public <T> void casAbility(List<T> units) {
+        specialAbility((List<Enemy>) units);
+    }
 
 }

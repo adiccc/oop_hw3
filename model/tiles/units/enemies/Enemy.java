@@ -9,7 +9,7 @@ import model.tiles.units.players.Player;
 
 import java.util.List;
 
-public abstract class Enemy extends Unit implements HeroicUnit {
+public abstract class Enemy extends Unit {
     protected int experienceValue;
 
     public Enemy(char tile, String name, int hitPoints, int attack, int defense, int experienceValue) {
@@ -35,9 +35,6 @@ public abstract class Enemy extends Unit implements HeroicUnit {
         if (!p.alive()){
             p.onDeath();
         }
-    }
-    public <T> void casAbility(List<T> units){
-
     }
     public abstract InputProvider turn(Player player);
 

@@ -83,9 +83,4 @@ public class Mage extends Player   {
                 "\t\tMana: " + currentMana + "/" + manaPool+
                 "\t\tSpell Power: " + spellPower;
     }
-
-    @Override
-    public <T> void casAbility(List<T> units) {
-        specialAbility((List<Enemy>) units);
-    }
 }

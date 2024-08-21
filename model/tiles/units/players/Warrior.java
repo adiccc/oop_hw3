@@ -33,15 +33,9 @@ public class Warrior extends Player{
                 "\t\tCooldown: " + remainingCoolDown + "/" + abilityCoolDown;
     }
 
-
     @Override
     public void newTick(){
         remainingCoolDown--;
-    }
-
-    @Override
-    public void visit(Player p) {
-
     }
 
     @Override
@@ -68,11 +62,5 @@ public class Warrior extends Player{
 
     public int getRemainingCoolDown() {
         return remainingCoolDown;
-    }
-
-
-    @Override
-    public <T> void casAbility(List<T> units) {
-        specialAbility((List<Enemy>) units);
     }
 }

@@ -74,11 +74,6 @@ public class Hunter extends Player{
         }
     }
 
-    public int getArrowsCount(){
-        return arrowsCount;
-    }
-
-
     public int getCurrentArrow() {
         return this.arrowsCount;
     }
@@ -87,11 +82,5 @@ public class Hunter extends Player{
     public String description() {
         return super.description() +
                 "\t\tArrows: " + arrowsCount;
-    }
-
-
-    @Override
-    public <T> void casAbility(List<T> units) {
-        specialAbility((List<Enemy>) units);
     }
 }
