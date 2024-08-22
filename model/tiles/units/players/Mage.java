@@ -7,8 +7,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Mage extends Player   {
-    private int remainingCoolDown ;
-    private int abilityCoolDown;
     private int manaPool; // holds the max value of mana;
     private int currentMana; // manaPool/4;
     private int manaCost;
@@ -39,11 +37,6 @@ public class Mage extends Player   {
     public void newTick(){
         currentMana = Math.min((currentMana+1)*level,manaPool);
     }
-
-    @Override
-    public void visit(Player p) {
-
-    }
     
 
     public void specialAbility(List<Enemy> enemies) {
@@ -52,20 +45,19 @@ public class Mage extends Player   {
                 .filter(e -> e.getPosition().range(this.position) <=  this.abilityRange)
                 .toList();
         if (currentMana<manaCost){
-            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but your current mana is: "+currentMana + "which is less than the mana cost");
+            messageCallback.send(String.format("%s  tried to cast %s tried to cast %dwhich is less than the mana cost",getName(),ABILITY_NAME,currentMana));
             return;
         }
+        messageCallback.send(String.format( "%s cast %s",getName() , ABILITY_NAME));
         while (hits<hitsCount&& !enemiesInRange.isEmpty()) {
-            messageCallback.send(getName()+ " cast " + ABILITY_NAME);
             Random random = new Random();
             Enemy enemy = enemiesInRange.get(random.nextInt(enemiesInRange.size()));
             int defense = enemy.defend();
-            messageCallback.send(enemy.getName() + "  rolled " + defense + " points ");
+            messageCallback.send(String.format( "%s rolled %d points ",enemy.getName(),defense));
             int damge = enemy.battleSpecialAbility(spellPower,defense);
-            messageCallback.send(this.getName() + " hit " + enemy.getName() + " for " + damge + " ability damage ");
+            messageCallback.send(String.format("%s hit %s for %d ability damage",this.getName()  , enemy.getName() ,  damge ));
             if(!enemy.alive()){
-                addExperience(enemy.experienceValue());
-                enemy.onDeath();
+                killEnemy(enemy);
                 enemiesInRange.remove(enemy);
             }
             hits= hits + 1;
@@ -79,8 +71,6 @@ public class Mage extends Player   {
     }
     @Override
     public String description() {
-        return super.description() +
-                "\t\tMana: " + currentMana + "/" + manaPool+
-                "\t\tSpell Power: " + spellPower;
+        return String.format("%s \t\tMana: %d / %d \t\tSpell Power: %d",super.description(), currentMana, manaPool,spellPower);
     }
 }

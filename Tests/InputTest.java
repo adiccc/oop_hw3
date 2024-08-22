@@ -1,4 +1,3 @@
-package Tests;
 
 import model.game.input.InputReader;
 import model.game.input.InputReaderFile;

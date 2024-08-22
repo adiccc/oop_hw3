@@ -1,8 +1,6 @@
-package Tests;
 
 import control.initializers.TileFactory;
 import model.game.input.InputProvider;
-import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;
 import model.tiles.units.enemies.Enemy;
 import model.tiles.units.players.Player;

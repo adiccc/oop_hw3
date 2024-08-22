@@ -1,7 +1,5 @@
-package Tests;
 
 import control.initializers.LevelInitializer;
-import model.game.input.InputReaderFile;
 import model.game.input.InputReaderScanncer;
 import model.tiles.Tile;
 import org.junit.Test;
@@ -19,7 +17,7 @@ public class LevelInitTest {
 
     @Test
     public void unitPosition() {
-        LevelInitializer levelInitializer=new LevelInitializer(1,new FixedGenerator(),new InputReaderScanncer(),(x)-> System.out.println(x));
+        LevelInitializer levelInitializer=new LevelInitializer(1,new FixedGenerator(),new InputReaderScanncer(),(x)-> {});
         for (int i=1;i<=4;i++){
             String levelPath="./Levels/level"+i+".txt";
             levelInitializer.initLevel(levelPath);

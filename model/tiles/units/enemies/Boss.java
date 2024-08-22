@@ -1,12 +1,13 @@
 package model.tiles.units.enemies;
 import model.game.input.InputProvider;
 import model.tiles.units.HeroicUnit;
+import model.tiles.units.Unit;
 import model.tiles.units.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Boss extends Enemy implements HeroicUnit {
+public class Boss extends Enemy implements HeroicUnit<Player> {
     private int visionRange;
     private int abilityFrequency;
     private int combatTickes;
@@ -65,15 +66,16 @@ public class Boss extends Enemy implements HeroicUnit {
                 return InputProvider.Down;
             }
         }
-
     }
 
-    public <T> void casAbility(List<T> units) {
-        Player player = (Player) units.get(0);
-        this.battleSpecialAbility(Integer.parseInt(this.getAttack()),player.defend());
-        if(!player.alive()){
-            player.onDeath();
+    public void casAbility(List<Player> units){
+        messageCallback.send(String.format("%s cast special Ability",getName()));
+        for (Player player : units) {
+            int damage=this.battleSpecialAbility(Integer.parseInt(this.getAttack()), player.defend());
+            messageCallback.send(String.format("%s dealt %d damage to %s",getName(),damage,player.getName()));
+            if (!player.alive()) {
+                player.onDeath();
+            }
         }
-
     }
 }

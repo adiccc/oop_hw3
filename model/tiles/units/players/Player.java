@@ -1,18 +1,13 @@
 package model.tiles.units.players;
-
-import model.game.Level;
 import model.game.input.InputProvider;
 import model.game.input.InputReader;
-import model.tiles.Empty;
-import model.tiles.Wall;
 import model.tiles.units.HeroicUnit;
 import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 import utils.Position;
-
 import java.util.List;
 
-public abstract class  Player extends Unit implements HeroicUnit {
+public abstract class  Player extends Unit implements HeroicUnit<Enemy> {
     public static final char PLAYER_TILE = '@';
     protected static final int LEVEL_REQUIREMENT = 50;
     protected static final int HEALTH_GAIN = 10;
@@ -46,7 +41,7 @@ public abstract class  Player extends Unit implements HeroicUnit {
         health.heal();
         attack += attackGain;
         defense += defenseGain;
-        messageCallback.send(getName()+" reached level "+level+": +"+healthGain+" Health, +"+attackGain+" Attack, +"+defenseGain+" Defense ");
+        messageCallback.send(String.format("#s reached level %d : +%d  Health, +%d  Attack, +%d Defense ",getName(),level,healthGain,attackGain,defenseGain));
     }
 
     protected int levelRequirement(){
@@ -72,19 +67,20 @@ public abstract class  Player extends Unit implements HeroicUnit {
 
     public void visit(Enemy e){
         battle(e);
-        if(!e.alive())
+        if(!e.alive()){
             killEnemy(e);
+            this.swapPosition(e);
+        }
     }
 
     public void visit(Player p){
         //Do nothing
     }
 
-    private void killEnemy(Enemy e){
+    protected void killEnemy(Enemy e){
         addExperience(e.experienceValue());
-        this.swapPosition(e);
         e.onDeath();
-        messageCallback.send(e.getName()+" died. "+getName()+" gained "+e.experienceValue()+" experience");
+        messageCallback.send(String.format("%s died %s gained %d experience",e.getName(),getName(),+e.experienceValue()));
     }
 
     @Override
@@ -112,9 +108,7 @@ public abstract class  Player extends Unit implements HeroicUnit {
     }
 
     public String description() {
-        return super.description() +
-                "\t\tLevel: " + level +
-                "\t\tExperience: " + experience + "/" + levelRequirement();
+        return String.format("%s \t\tLevel: %d \t\tExperience: %d/%d",super.description(),level,experience,levelRequirement());
     }
 
     public void setInputReader(InputReader inputReader) {
@@ -123,8 +117,8 @@ public abstract class  Player extends Unit implements HeroicUnit {
 
     public abstract void newTick();
 
-    public <T> void casAbility(List<T> units) {
-        specialAbility((List<Enemy>) units);
+    public void casAbility(List<Enemy> units) {
+        specialAbility(units);
     }
 
 }

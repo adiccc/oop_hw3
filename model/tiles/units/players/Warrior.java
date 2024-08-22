@@ -29,8 +29,7 @@ public class Warrior extends Player{
     // the Warrior describe
     @Override
     public String description() {
-        return super.description() +
-                "\t\tCooldown: " + remainingCoolDown + "/" + abilityCoolDown;
+        return String.format("%s \t\tCooldown: %d/%d",super.description(), remainingCoolDown, abilityCoolDown);
     }
 
     @Override
@@ -42,22 +41,20 @@ public class Warrior extends Player{
     public void specialAbility(List<Enemy> enemies) {
         if (remainingCoolDown <= 0) {
             int healthGain=-health.getCurrent()+health.updateCurrentHealthOnCast(defense);
-            messageCallback.send(getName()+" used "+ABILITY_NAME+", healing for "+healthGain);
+            messageCallback.send(String.format("%s used %s, healing for %d",getName(),ABILITY_NAME,healthGain));
              for (Enemy e : enemies) {
                 if (e.getPosition().range(this.position) <= 3) {
                     remainingCoolDown = abilityCoolDown;
-                    int damageTaken=e.battleSpecialAbility((int) (health.getCapacity() * 0.1), e.defend());
-                    messageCallback.send(getName()+" dealt "+damageTaken+" damage to "+e.getName());
-                    if (!e.alive()) {
-                        addExperience(e.experienceValue());
-                        e.onDeath();
-                    }
+                    int damageTaken=e.battleSpecialAbility(Double.valueOf(health.getCapacity() * 0.1).intValue(), e.defend());
+                    messageCallback.send(String.format("%s dealt %d damage to %s",getName(),damageTaken,e.getName()));
+                    if (!e.alive())
+                        killEnemy(e);
                     return;
                 }
             }
         }
         else{
-            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is a cooldown: "+remainingCoolDown);}
+            messageCallback.send(String.format("%s tried to cast %s , but there is a cooldown: %d",getName(),ABILITY_NAME,remainingCoolDown));}
     }
 
     public int getRemainingCoolDown() {

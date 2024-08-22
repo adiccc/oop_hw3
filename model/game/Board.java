@@ -72,7 +72,6 @@ public class Board {
         if(specialAbility){
             player.casAbility(enemies);
         }
-        specialAbility = false;
     }
 
     private void interactTiles(Unit u,Position newPosition){

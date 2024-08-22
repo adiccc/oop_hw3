@@ -1,5 +1,6 @@
 package model.tiles.units.players;
 
+import model.tiles.units.Unit;
 import model.tiles.units.enemies.Enemy;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class Rogue extends Player {
     }
     @Override
     public void levelUp(){
+        super.levelUp();
         currentEnergy = 100;
         attack = attack+(level*3);
 
@@ -26,35 +28,28 @@ public class Rogue extends Player {
        currentEnergy = Math.min(currentEnergy+10, 100);
     }
 
-    @Override
-    public void visit(Player p) {
-
-    }
-
 
     public void specialAbility(List<Enemy> enemies) {
         if(currentEnergy <  cost) {
-            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is not enough energy"  );
+            messageCallback.send(String.format("%s tried to cast %s , but there is not enough energy",getName(),ABILITY_NAME));
         }
         else{
             List<Enemy> enemiesInRange = enemies.stream()
                     .filter(e -> e.getPosition().range(this.position) <=2)
                     .toList();
             if(enemiesInRange.isEmpty()) {
-                messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but there is no any enemy in range"  );
+                messageCallback.send(String.format("%s tried to cast %s , but there is no any enemy in range",getName(),ABILITY_NAME));
             }
             else{
-                messageCallback.send(getName()+ " cast " + ABILITY_NAME);
+                messageCallback.send(String.format("%s cast %s",getName(),ABILITY_NAME));
                 currentEnergy = currentEnergy - cost;
                 for (Enemy e : enemiesInRange){
                     int defense = e.defend();
-                    messageCallback.send(e.getName() + "  rolled " + defense + " points ");
+                    messageCallback.send(String.format("%s rolled %d points",e.getName(),defense));
                     int damage = e.battleSpecialAbility(Integer.parseInt(this.getAttack()), defense);
-                    messageCallback.send(this.getName() + " hit " + e.getName() + " for " + damage + " ability damage ");
-                    if(!e.alive()){
-                        addExperience(e.experienceValue());
-                        e.onDeath();
-                    }
+                    messageCallback.send(String.format("%s hit %s for %d ability damage ",this.getName() , e.getName() , damage ));
+                    if(!e.alive())
+                        killEnemy(e);
                 }
             }
 
@@ -64,8 +59,7 @@ public class Rogue extends Player {
     }
 
     public String description() {
-        return super.description() +
-                "\t\tEnergy: " + getCurrentEnergy() + "/100";
+        return String.format("%s \t\tEnergy: %d /100",super.description(),getCurrentEnergy());
     }
 
     public int getCurrentEnergy() {

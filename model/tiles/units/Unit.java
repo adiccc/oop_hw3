@@ -10,9 +10,6 @@ import utils.Position;
 import utils.callbacks.DeathCallback;
 import utils.callbacks.MessageCallback;
 import utils.generators.Generator;
-
-import java.util.List;
-
 public abstract class Unit extends Tile {
     protected String name;
     protected Health health;
@@ -53,18 +50,18 @@ public abstract class Unit extends Tile {
 
 
     public void battle(Unit enemy) {
-        messageCallback.send(getName()+" engaged in combat with "+enemy.getName());
+        messageCallback.send(String.format("%s  engaged in combat with %s",getName(),enemy.getName()));
         messageCallback.send(description());
         messageCallback.send(enemy.description());
         int attack = this.attack();
         int defense = enemy.defend();
         int damageTaken = enemy.health.takeDamage(attack - defense);
-        messageCallback.send(getName()+" rolled "+attack+" attack points.");
-        messageCallback.send(enemy.getName()+" rolled "+defense+" defense points.");
+        messageCallback.send(String.format("%s rolled %d attck points.",getName(),attack));
+        messageCallback.send(String.format("%s rolled %d defense points.",enemy.getName(),defense));
         if(damageTaken > 0)
-            messageCallback.send(getName()+" dealt "+damageTaken+" damage to "+enemy.getName());
+            messageCallback.send(String.format("%s dealt %d damge to %s",getName(),damageTaken,enemy.getName()));
         else
-            messageCallback.send(getName()+ "did not dealt damage to "+enemy.getName());
+            messageCallback.send(String.format("%s did not dealt damage to %s",getName(),enemy.getName()));
     }
 
     public void visit(Empty e){
@@ -101,7 +98,6 @@ public abstract class Unit extends Tile {
     public String getDefence(){
         return String.valueOf(defense);
     }
-
 
     public int battleSpecialAbility(int attack, int defense) {
         return this.health.takeDamage(attack - defense);

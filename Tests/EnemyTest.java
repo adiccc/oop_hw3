@@ -1,4 +1,4 @@
-package Tests;
+
 
 import control.initializers.TileFactory;
 import model.game.Board;

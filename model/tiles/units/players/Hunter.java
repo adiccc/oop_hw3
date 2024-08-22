@@ -52,24 +52,22 @@ public class Hunter extends Player{
                 .filter(e -> e.getPosition().range(this.position) <=range)
                 .toList();
         if(arrowsCount==0 || enemiesInRange.isEmpty()) {
-            messageCallback.send(getName()+" tried to cast "+ABILITY_NAME+", but your current arrows is: 0 or you dont have any enemy in range:"+range );
+            messageCallback.send(String.format("%s tried to cast %s , but your current arrows is: 0 or you dont have any enemy in range: %d",getName(),ABILITY_NAME,range) );
         }
         else if(arrowsCount>0){
-            messageCallback.send(getName()+ " cast " + ABILITY_NAME);
+            messageCallback.send(String.format("%s cast %s",getName(), ABILITY_NAME));
             arrowsCount = arrowsCount -1;
             Optional<Enemy> closestEnemy = enemiesInRange.stream().min((e1, e2) ->
-                    Integer.compare((int) e1.getPosition().range(this.position), (int) e2.getPosition().range(this.position)));
-
+                    Integer.compare(Double.valueOf(e1.getPosition().range(this.position)).intValue(), Double.valueOf(e2.getPosition().range(this.position)).intValue()));
             closestEnemy.ifPresent(enemy -> {
                 // Call a method on the enemy object
                 int defense = enemy.defend();
-                messageCallback.send(enemy.getName() + "  rolled " + defense + " points ");
+                messageCallback.send(String.format("%s rolled %d points",enemy.getName() , defense));
                 int damage = enemy.battleSpecialAbility(Integer.parseInt(this.getAttack()),defense);
-                messageCallback.send(this.getName() + " hit " + enemy.getName() + " for " + damage + " ability damage ");
-                if(!enemy.alive()) {
-                    addExperience(enemy.experienceValue());
-                    enemy.onDeath();
-                }
+                messageCallback.send(String.format("%s hit %s for %d ability damage",this.getName() , enemy.getName(),damage ));
+                if(!enemy.alive())
+                    killEnemy(enemy);
+
             });
         }
     }
@@ -80,7 +78,6 @@ public class Hunter extends Player{
 
     @Override
     public String description() {
-        return super.description() +
-                "\t\tArrows: " + arrowsCount;
+        return String.format("%s \t\tArrows: %d",super.description(),arrowsCount);
     }
 }
