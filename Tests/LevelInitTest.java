@@ -21,7 +21,7 @@ public class LevelInitTest {
         for (int i=1;i<=4;i++){
             String levelPath="./Levels/level"+i+".txt";
             levelInitializer.initLevel(levelPath);
-            Map<Position, Tile> board=levelInitializer.buildBord().getBoard();
+            Map<Position, Tile> board=levelInitializer.getBoard().getBoard();
             List<String> lines;
             try {
                 lines = Files.readAllLines(Paths.get(levelPath));

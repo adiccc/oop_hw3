@@ -43,6 +43,8 @@ public class EnemyTest {
         List<Enemy> e=new ArrayList<>();
         e.add(enemy);
         board.build(tile,player,e,2);
+        for(int i=0;i<12;i++)
+            enemy.accept(player);
         Assert.assertEquals("enemy should have been removed from the enemies list after death",0,board.getEnemies().size());
     }
 

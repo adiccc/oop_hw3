@@ -29,7 +29,10 @@ public class Game {
         levelsFiles.sort((File f1,File f2)->f1.getName().compareTo(f2.getName()));
         for (File level : levelsFiles){
             initializer.initLevel(path+"/"+level.getName());
-            Level l=new Level(initializer.buildBord(),messageCallback);
+            if(initializer.getBoard()!=null) {
+                new Level(initializer.getBoard(), messageCallback);
+                break;
+            }
         }
     }
 

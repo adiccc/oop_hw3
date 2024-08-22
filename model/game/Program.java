@@ -24,7 +24,7 @@ public class Program
         this(messageCallback,new InputReaderFile(pathToTestFile), new FixedGenerator());
     }
     public Program(MessageCallback messageCallback){
-        this(messageCallback,new InputReaderScanncer(), new RandomGenerator());
+        this(messageCallback,new InputReaderScanncer(), new FixedGenerator());
     }
 
     public void start(){

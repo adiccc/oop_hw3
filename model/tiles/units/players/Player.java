@@ -41,7 +41,7 @@ public abstract class  Player extends Unit implements HeroicUnit<Enemy> {
         health.heal();
         attack += attackGain;
         defense += defenseGain;
-        messageCallback.send(String.format("#s reached level %d : +%d  Health, +%d  Attack, +%d Defense ",getName(),level,healthGain,attackGain,defenseGain));
+        messageCallback.send(String.format("%s reached level %d : +%d  Health, +%d  Attack, +%d Defense ",getName(),level,healthGain,attackGain,defenseGain));
     }
 
     protected int levelRequirement(){
@@ -68,8 +68,8 @@ public abstract class  Player extends Unit implements HeroicUnit<Enemy> {
     public void visit(Enemy e){
         battle(e);
         if(!e.alive()){
-            killEnemy(e);
             this.swapPosition(e);
+            killEnemy(e);
         }
     }
 

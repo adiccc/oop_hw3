@@ -15,12 +15,6 @@ import java.util.List;
 
 public class PlayerTest {
 
-    //TODO :
-    // מעבר שלב
-    // ניצחון סופי
-    // on death
-
-
     @Test
     public void onTick(){
         TileFactory tileFactory=new TileFactory(); // generate the tile factory for the game
